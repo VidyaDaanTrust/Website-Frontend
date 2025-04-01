@@ -1,0 +1,45 @@
+.contribution-banner-container {
+    background-color: #478D4A;
+    color: #F5FAF5;
+    padding: 50px 5%;
+    text-align: left;
+}
+
+.contribution-banner-container h1 {
+    font-size: 38px;
+    font-weight: 700;
+    margin-bottom: 30px;
+    max-width: 1421px;
+}
+
+.contribution-banner-container-button {
+    display: inline-flex;
+    align-items: center;
+    background-color: #F5FAF5;
+    color: #2E7D32;
+    padding: 12px 24px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 18px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.contribution-banner-container-button:hover {
+    background-color: #f0f0f0;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.contribution-banner-arrow-icon {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 8px;
+}
+
+.contribution-banner-arrow-icon img {
+    width: 16px;
+    height: 16px;
+}

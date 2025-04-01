@@ -1,0 +1,60 @@
+.loader-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #2E7D32;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: transform 1s ease-in-out;
+    transform: translateY(0);
+  }
+  
+  .loader-container.shutter-up {
+    transform: translateY(-100%);
+  }
+  
+  /* Add this to Loader.css */
+.white-logo {
+    filter: brightness(0) invert(1);  /* This makes the logo white */
+    width: 250px;
+    height: auto;
+  }
+  .loader-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .loader-logo {
+    margin-bottom: 20px;
+    animation: pulse 2s infinite;
+  }
+  
+  .loader-title {
+    color: white;
+    font-size: 24px;
+    font-weight: 500;
+    text-align: center;
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  @keyframes pulse {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.1);
+      opacity: 0.8;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }

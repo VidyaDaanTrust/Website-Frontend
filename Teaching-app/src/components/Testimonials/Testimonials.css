@@ -1,0 +1,105 @@
+/* Testimonials .TeachingTestimonials {
+    margin-top: 70px;
+    margin-bottom: 70px;
+}
+
+#Testimonials {
+    margin-bottom: 0;
+}
+
+.TeachingTestimonialsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    --move-grid: 100%;
+    column-gap: 7%;
+    row-gap: 80px;
+}
+
+.TeachingTestimonialsBox {
+    position: relative;
+    --box-width: 100%;
+    height: 95%;
+    opacity: 0.7;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+}
+
+.TeachingTestimonialsBox:hover {
+    scale: 1.1;
+    z-index: 3;
+    opacity: 2;
+}
+
+@media screen and (min-width:750px) {
+    .TeachingTestimonialsBox:nth-child(3n+2):hover {
+        transform: translateX(calc(-1*var(--move-grid)));
+    }
+
+    .TeachingTestimonialsBox:nth-child(3n):hover {
+        transform: translateX(calc(-2*var(--move-grid)));
+    }
+}
+
+.TeachingTestimonialsImage {
+    width: 100%;
+    aspect-ratio: 1/1;
+    border-radius: 8px;
+    --radius-of-text: 5%;
+    border: 3px solid #A5C7A1;
+    object-fit: cover;
+    object-position: center;
+    margin-bottom: 5%;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+}
+
+@media screen and (min-width: 750px) {
+    .TeachingTestimonialsBox:hover .TeachingTestimonialsImage {
+        background-image: radial-gradient(#ffffff, transparent, #2E7D3233);
+        box-shadow: 0.2vw 0.2vw 1vw 0.2vw #2E7D3233;
+    }
+}
+
+.TeachingTestimonialsDescription {
+    position: absolute;
+    color: #526652;
+    font-size: max(1.1vw, 0.65rem);
+    background-color: #f7f7f7;
+    width: calc(var(--box-width)*2);
+    aspect-ratio: 2/1;
+    top: 0;
+    left: calc(var(--box-width)*1.01);
+    border: 3px solid #A5C7A1;
+    border-radius: 1vw;
+    padding-left: 2vw;
+    padding-right: 2vw;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+}
+
+.TeachingTestimonialsBox:hover .TeachingTestimonialsDescription {
+    display: flex;
+}
+
+.TeachingTestimonialsName {
+    color: #526652;
+    font-weight: 700;
+    font-size: max(1.4vw, 15px);
+    position: absolute;
+    bottom: 3%;
+    left: 5%;
+    transition-duration: 300ms;
+    transition-timing-function: ease-in-out;
+}
+
+@media screen and (min-width: 750px) {
+    .TeachingTestimonialsBox:hover .TeachingTestimonialsName {
+        color: #2E7D32;
+        text-shadow: 0.1vw 0.1vw 0.1vw #2E7D3233;
+        bottom: -8%;
+    }
+} */

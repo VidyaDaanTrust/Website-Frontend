@@ -1,0 +1,157 @@
+.DownloadPageCard-outer-container {
+    width: 45%;
+    max-width: 100%;
+    transition: transform 0.3s ease;
+}
+
+.DownloadPageCard-outer-container:hover {
+    box-shadow: 0 6px 12px #e0f5dd;
+
+}
+
+.DownloadPageCard-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 100%;
+    background-color: #F5FAF5;
+    border-radius: 8px;
+    border: 1px solid #ADCCAF;
+    border-left: 8px solid #2E7D32;
+    padding: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.attachment-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 16px;
+    width: 24px;
+    height: 24px;
+    transition: width 0.3s ease, margin-right 0.3s ease, opacity 0.3s ease;
+    color: #2E7D32;
+    flex-shrink: 0;
+}
+
+.attachment-icon-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    transition: all 0.3s ease;
+}
+
+.DownloadPageCard-Content-container {
+    flex: 1;
+    transition: transform 0.3s ease;
+}
+
+.DownloadPageCard-Content-Title {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.DownloadPageCard-Content-Title .title-text {
+    font-size: 20px;
+    font-weight: 500;
+    color: #526652;
+    margin-bottom: 2px;
+}
+
+.DownloadPageCard-Content-Title .subtitle-text {
+    font-size: 18px;
+    color: #526652;
+}
+
+.DownloadPageCard-Content-Update-date {
+    font-size: 14px;
+    color: #ADCCAF;
+}
+
+.arrow-icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 16px;
+    width: 20px;
+    height: 20px;
+    opacity: 0;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+}
+
+.arrow-icon-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Hover effect to make content expand left */
+.DownloadPageCard-outer-container:hover .attachment-icon-container {
+    width: 0;
+    margin-right: 0;
+    opacity: 0;
+}
+
+.DownloadPageCard-outer-container:hover .arrow-icon-container {
+    opacity: 1;
+}
+
+/* Responsive breakpoints */
+@media screen and (max-width: 1200px) {
+    .DownloadPageCard-outer-container {
+        width: 48%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .DownloadPageCard-outer-container {
+        width: 100%;
+        margin-bottom: 16px;
+    }
+
+    .DownloadPageCard-Content-Title {
+        margin-bottom: 12px;
+    }
+
+    .DownloadPageCard-Content-Title .title-text {
+        font-size: 16px;
+    }
+
+    .DownloadPageCard-Content-Title .subtitle-text {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .DownloadPageCard-container {
+        padding: 12px;
+        border-left: 6px solid #2E7D32;
+    }
+
+    .attachment-icon-container {
+        width: 20px;
+        height: 20px;
+        margin-right: 12px;
+    }
+
+    .arrow-icon-container {
+        width: 16px;
+        height: 16px;
+    }
+
+    .DownloadPageCard-Content-Title .title-text {
+        font-size: 12px;
+    }
+
+    .DownloadPageCard-Content-Title .subtitle-text {
+        font-size: 12px;
+    }
+
+    .DownloadPageCard-Content-Update-date {
+        font-size: 11px;
+    }
+}

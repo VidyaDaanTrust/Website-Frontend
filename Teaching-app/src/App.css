@@ -1,0 +1,84 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+:root {
+  --primary-color: #82D9E8;
+}
+
+
+
+* {
+  padding: 0%;
+  margin: 0%;
+  box-sizing: border-box;
+  /* color: rgb(0, 0, 0); */
+}
+
+/* Breadcrumb styles - reusing from Downloads.css */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  margin: 20px 0;
+  font-size: 14px;
+  color: #526652;
+}
+
+.breadcrumb-link {
+  text-decoration: none;
+  color: #526652;
+}
+
+.breadcrumb-link:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb-separator {
+  margin: 0 8px;
+}
+
+.breadcrumb-current {
+  color: #526652;
+}
+
+
+.title-container {
+  display: flex;
+  width: fit-content;
+  position: relative;
+}
+
+.title-container::before {
+  position: absolute;
+  content: '';
+  width: 80%;
+  height: 3px;
+  left: 10%;
+  background-color: #9AE9E6;
+  border-radius: 100%;
+  bottom: 2.8rem;
+}
+
+.title-container h1 {
+  font-size: 2.5rem;
+  letter-spacing: 0.4rem;
+  font-weight: 800;
+  color: #FFFFFF;
+  text-transform: uppercase;
+}
+
+html {
+  background: #F5FAF5 !important;
+}
+
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: #F5FAF5 !important;
+  margin: 0;
+  padding: 0;
+}
+
+.app-jsx-navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10000;
+  /* Ensure navbar appears above other content */
+}

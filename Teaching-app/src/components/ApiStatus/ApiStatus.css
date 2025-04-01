@@ -1,0 +1,45 @@
+.api-status-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 1000;
+    max-width: 350px;
+}
+
+.api-status-message {
+    border-radius: 4px;
+    padding: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Error state - for complete API unavailability */
+.api-status-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Warning state - for missing endpoints but API is available */
+.api-status-message.warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeeba;
+}
+
+.api-status-message h3 {
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+.api-status-message p {
+    margin-bottom: 8px;
+}
+
+.error-details {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 8px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 0.9em;
+    word-break: break-word;
+} 

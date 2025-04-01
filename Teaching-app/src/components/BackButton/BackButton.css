@@ -1,0 +1,31 @@
+.back-button {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #2E7D32;
+    text-decoration: underline;
+    font-size: 22px;
+    font-weight: 400;
+    /* padding: 8px; */
+    transition: all 0.3s ease;
+    margin: 32px 0;
+}
+
+.back-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform: rotate(45deg);
+    /* Default position is rotated -45 degrees */
+    transition: transform 0.3s ease;
+}
+
+.back-icon img {
+    width: 32px;
+    height: 32px;
+}
+
+.back-icon.rotated {
+    transform: rotate(0deg);
+    /* On hover, rotate to 0 degrees */
+}

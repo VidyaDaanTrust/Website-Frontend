@@ -1,0 +1,130 @@
+.carousel-tray {
+    contain: layout;
+    width: 100%;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.carousel-container {
+    width: 100%;
+    position: relative;
+    overflow-x: visible;
+    /* Prevent unwanted scrolling on desktop */
+}
+
+.carousel-grid {
+    display: flex;
+    gap: 20px;
+    transition: transform 0.5s ease;
+    /* Used for desktop button navigation */
+    width: 100%;
+}
+
+.carousel-container::before,
+.carousel-container::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 40px;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.carousel-item {
+    opacity: 1;
+    min-width: 0;
+    transition: opacity 0.5s ease;
+    /* overflow: visible; */
+
+}
+
+.carousel-item--overflown {
+    opacity: 0.5;
+}
+
+.carousel-navigation {
+    display: flex;
+    justify-content: center;
+    gap: 70px;
+}
+
+/* Navigation button styles */
+.carousel-nav-button {
+    margin-top: 10px;
+    border-radius: 50%;
+    border: none;
+    background-color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.carousel-nav-button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.carousel-nav-button img {
+    width: 70px;
+    height: 70px;
+}
+
+.carousel-prev-nav:not(:disabled) img {
+    transform: rotate(180deg);
+}
+
+.carousel-prev-nav:disabled img {
+    transform: rotate(180deg);
+}
+
+/* Mobile-specific styles */
+@media screen and (max-width: 980px) {
+    .carousel-tray {
+        padding: 0;
+        /* Remove padding on mobile */
+    }
+
+    .carousel-container {
+        overflow-x: auto;
+        /* Enable horizontal scrolling on mobile */
+        -webkit-overflow-scrolling: touch;
+        /* Smooth scrolling on iOS */
+        scrollbar-width: none;
+        /* Hide scrollbar in Firefox */
+    }
+
+    .carousel-container::-webkit-scrollbar {
+        display: none;
+        /* Hide scrollbar in Webkit browsers */
+    }
+
+    .carousel-grid {
+        width: auto;
+        /* Allow grid to expand with content */
+        transition: none;
+        /* Disable transition for touch scrolling */
+        transform: none !important;
+        /* Override transform for touch scrolling */
+    }
+
+    .carousel-item {
+        flex: 0 0 90%;
+        /* Each item takes 90% of viewport width */
+        max-width: 90%;
+        /* Ensure items don’t exceed viewport */
+    }
+
+    .carousel-container::before,
+    .carousel-container::after {
+        display: none;
+        /* Hide gradients on mobile */
+    }
+
+    .carousel-navigation {
+        display: none;
+        /* Hide navigation buttons on mobile */
+    }
+}

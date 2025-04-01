@@ -1,0 +1,524 @@
+/* About Us Section Styles */
+
+/* Hero section with background image */
+.about-us-hero {
+  position: relative;
+  height: 400px;
+  border-radius: 8px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  margin-bottom: 30px;
+}
+
+.about-us-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Semi-transparent overlay for text readability */
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-end;
+  padding: 40px;
+  background: linear-gradient(#2e7d3270, #2e7d32a8);
+}
+
+/* Hero title styling */
+.hero-title {
+  color: white;
+  font-size: 48px;
+  font-weight: bold;
+  margin: 0;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* Mission statement paragraph styling */
+.mission-statement {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.mission-statement p {
+  font-size: 18px;
+  line-height: 1.6;
+  color: #444;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .about-us-hero {
+    height: 300px;
+  }
+
+  .hero-title {
+    font-size: 36px;
+  }
+
+  .mission-statement p {
+    font-size: 16px;
+  }
+}
+
+/* General container styling with improved variables and consistency */
+:root {
+  --primary-color: #2E7D32;
+  --primary-light: rgba(46, 125, 50, 0.5);
+  --text-color: #526652;
+  --heading-color: #333;
+  --bg-light: #f9f9f9;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --border-radius: 12px;
+  --spacing-sm: 15px;
+  --spacing-md: 30px;
+  --spacing-lg: 60px;
+  --transition: all 0.3s ease;
+}
+
+/* Base styles with improved consistency */
+
+/* Section headers with consistent styling */
+.about-us-vision-section h1 {
+  font-size: 38px;
+  color: var(--heading-color);
+  /* margin-bottom: var(--spacing-md); */
+  font-weight: 700;
+}
+
+/* Vision content with improved flexbox */
+.vision-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+}
+
+.about-us-our-vision-section {
+  margin-top: var(--spacing-lg);
+}
+
+/* Vision list with improved visual styling */
+.about-us-our-vision {
+  list-style: none;
+  padding: var(--spacing-sm) 0 var(--spacing-md) 0;
+  margin: 0;
+  flex: 1;
+}
+
+.about-us-our-vision h2 {
+  font-size: 48px;
+  margin: 0 0 var(--spacing-md) 0;
+  text-align: left;
+  color: var(--heading-color);
+}
+
+.about-us-our-vision li {
+  color: var(--text-color);
+  position: relative;
+  padding-left: 60px;
+  margin-bottom: var(--spacing-md);
+  font-size: 18px;
+  font-weight: 300;
+  line-height: 1.4;
+  transition: var(--transition);
+}
+
+/* Improved bullet points with animation */
+.about-us-our-vision li::before {
+  content: "";
+  position: absolute;
+  margin-left: 30px;
+  left: 0;
+  top: 6px;
+  width: 12px;
+  height: 12px;
+  background-color: var(--primary-color);
+  border-radius: 50%;
+  transition: var(--transition);
+}
+
+.about-us-our-vision li:hover::before {
+  transform: scale(1.2);
+  background-color: var(--primary-color);
+}
+
+/* Creates the connecting line between bullets with improved positioning */
+.about-us-our-vision li:not(:last-child)::after {
+  content: "";
+  margin-left: 30px;
+  position: absolute;
+  left: 6px;
+  top: 16px;
+  width: 2px;
+  opacity: 0.5;
+  height: calc(100% + 18px);
+  background-color: var(--primary-color);
+}
+
+
+/* Mission section with improved visual consistency */
+.about-us-mission-section {
+  max-width: 1440px;
+  /* margin: var(--spacing-lg) auto; */
+  /* padding: 10px var(--spacing-md); */
+  background-color: var(--bg-light);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+}
+
+.about-us-mission-section h1 {
+  font-size: 38px;
+  color: var(--heading-color);
+  /* margin-bottom: var(--spacing-md); */
+  font-weight: 700;
+}
+
+.mission-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+
+/* Mission points with improved visual feedback */
+.mission-points {
+  flex: 1;
+}
+
+.mission-point {
+  padding-left: 1.7rem;
+  display: flex;
+  align-items: flex-start;
+  transition: var(--transition);
+}
+
+.mission-point:hover {
+  transform: translateX(5px);
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 24px;
+  height: 24px;
+  background-color: var(--primary-color);
+  color: white;
+  border-radius: 4px;
+  margin-right: 15px;
+  font-weight: bold;
+  transition: var(--transition);
+}
+
+.mission-point:hover .checkbox {
+  transform: scale(1.1);
+}
+
+.mission-point p {
+  color: var(--text-color);
+  position: relative;
+  margin-bottom: var(--spacing-md);
+  font-size: 24px;
+  font-weight: 400;
+  line-height: 1.4;
+  transition: var(--transition);
+}
+
+.highlight {
+  font-weight: 700;
+  color: var(--primary-color);
+}
+
+/* Image styling with improved hover effects */
+.our-vision-image {
+  max-width: 30%;
+  border-radius: var(--border-radius);
+  flex: 1;
+  object-fit: cover;
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+}
+
+.our-vision-image:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.our-mission-image {
+  flex: 1;
+  max-width: 30%;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow);
+  object-fit: cover;
+  transition: var(--transition);
+}
+
+.our-mission-image:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.our-vision-image,
+.our-mission-image {
+  animation: slideDown 0.8s ease-out;
+}
+
+/* Improved responsive styles with better breakpoints */
+@media (max-width: 1650px) and (min-width:800px) {
+  .about-us-container {
+    max-width: 85%;
+  }
+
+  .about-us-our-vision h2 {
+    font-size: 42px;
+  }
+
+  .our-vision-image {
+    max-width: 300px;
+  }
+
+  .our-mission-image {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 1650px) and (min-width:576px) {
+  .about-us-container {
+    max-width: 85%;
+  }
+}
+
+@media (max-width: 992px) {
+  .about-us-our-vision h2 {
+    font-size: 38px;
+  }
+
+  .about-us-our-vision li {
+    font-size: 18px;
+  }
+
+  .about-us-container h1 {
+    font-size: 28px;
+  }
+
+  .about-us-vision-section h1 {
+    font-size: 32px;
+  }
+
+  .our-vision-image {
+    max-width: 300px;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --spacing-md: 20px;
+    --spacing-lg: 40px;
+  }
+
+  .vision-content,
+  .mission-content {
+    flex-direction: column;
+  }
+
+  .our-vision-image,
+  .our-mission-image {
+    max-width: 100%;
+    margin-top: var(--spacing-md);
+    order: -1;
+    /* Show image first on mobile */
+  }
+
+  .about-us-our-vision h2 {
+    font-size: 34px;
+    text-align: center;
+  }
+
+  .about-us-container h1 {
+    font-size: 26px;
+  }
+
+  .about-us-intro p {
+    font-size: 18px;
+  }
+
+  .mission-points {
+    margin-top: var(--spacing-md);
+  }
+
+  .about-us-mission-section h1,
+  .about-us-vision-section h1 {
+    text-align: center;
+  }
+}
+
+@media (max-width: 576px) {
+  :root {
+    --spacing-sm: 10px;
+    --spacing-md: 15px;
+    --spacing-lg: 30px;
+  }
+
+  .about-us-container {
+    /* padding: 15px 10px; */
+    width: 90%;
+    padding-bottom: 15px;
+  }
+
+  .top_image {
+    padding: 10px;
+  }
+
+  .AboutUs_background_cover {
+    top: 10px;
+    left: 10px;
+  }
+
+  .about-us-container h1 {
+    font-size: 24px;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .about-us-intro {
+    margin: var(--spacing-lg) 0;
+  }
+
+  .about-us-intro p {
+    font-size: 18px;
+  }
+
+  .about-us-our-vision-section {
+    margin-top: var(--spacing-lg);
+  }
+
+  .about-us-our-vision h2 {
+    font-size: 28px;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .about-us-our-vision li {
+    font-size: 18px;
+    padding-left: 45px;
+    margin-bottom: var(--spacing-md);
+  }
+
+  .about-us-our-vision li::before {
+    margin-left: 20px;
+  }
+
+  .about-us-our-vision li:not(:last-child)::after {
+    margin-left: 20px;
+  }
+
+  .mission-point {
+    margin-bottom: 15px;
+  }
+
+  .mission-point p {
+    font-size: 18px;
+  }
+
+  .checkbox {
+    min-width: 20px;
+    height: 20px;
+    margin-right: 10px;
+  }
+
+  .about-us-mission-section {
+    /* padding: 0px 15px; */
+    /* margin: var(--spacing-lg) auto;   */
+  }
+
+  .about-us-mission-section h1 {
+    font-size: 24px;
+    margin-bottom: var(--spacing-md);
+  }
+}
+
+@media (max-width: 375px) {
+  .about-us-our-vision h2 {
+    font-size: 24px;
+  }
+
+  .about-us-our-vision li {
+    font-size: 16px;
+    padding-left: 35px;
+  }
+
+  .about-us-our-vision li::before {
+    margin-left: 15px;
+    width: 10px;
+    height: 10px;
+  }
+
+  .about-us-our-vision li:not(:last-child)::after {
+    margin-left: 15px;
+    left: 5px;
+  }
+
+  .mission-point p {
+    font-size: 14px;
+  }
+}
+
+/* Loading indicator styles */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  background-color: #ffffff;
+}
+
+.loading-spinner {
+  border: 5px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 5px solid rgb(26, 184, 26);
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Progress text styling */
+.loading-container p {
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  color: #333;
+  margin-top: 10px;
+}

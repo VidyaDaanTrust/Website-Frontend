@@ -1,0 +1,137 @@
+.announcement-details-container {
+    width: 90%;
+    max-width: 1440px;
+    /* margin: 0 auto 25vh auto; */
+    margin: 0 auto 25vh auto;
+    /* padding: 40px; */
+    background-color: #F5FAF5;
+    height: 60vh;
+}
+
+/* Announcement Content Styles */
+.announcement-details-announcement-content {
+    background-color: #F5FAF5;
+    /* padding: 30px; */
+    border-radius: 8px;
+}
+
+/* Title of Announcement */
+.announcement-details-announcement-title {
+    font-size: 32px;
+    color: #222;
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+/* Date and Calendar Icon */
+.announcement-details-announcement-date {
+    width: 135px;
+    font-size: 18px;
+    color: #526652;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.announcement-details-calendar-icon {
+    width: 32px;
+    height: 32px;
+}
+
+/* Main Content Message */
+.announcement-details-announcement-message {
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 30px;
+}
+
+.announcement-details-announcement-message p {
+    color: #526652;
+}
+
+/* Important Information Section */
+.announcement-details-important-info {
+    font-size: 18px;
+    color: #333;
+    margin-top: 30px;
+}
+
+.announcement-details-important-info h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #4a8522;
+    /* Dark green for header */
+}
+
+.announcement-details-important-info p {
+    margin: 8px 0;
+    color: #526652;
+    font-size: 16px;
+}
+
+/* Small enhancements for responsiveness */
+@media (max-width: 1200px) {
+    .announcement-details-container {
+        /* padding: 20px; */
+        width: 90%;
+    }
+
+    .announcement-details-announcement-title {
+        font-size: 20px;
+    }
+
+    .announcement-details-announcement-message {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .announcement-details-container {
+        width: 90%;
+        /* padding: 15px; */
+    }
+
+    .announcement-details-announcement-title {
+        font-size: 18px;
+        margin-bottom: 15px;
+    }
+
+    .announcement-details-announcement-date {
+        width: 120px;
+        font-size: 16px;
+    }
+
+    .announcement-details-calendar-icon {
+        width: 24px;
+        height: 24px;
+    }
+
+    .announcement-details-announcement-message {
+        font-size: 14px;
+    }
+
+    .announcement-details-important-info h2 {
+        font-size: 18px;
+    }
+
+    .announcement-details-important-info p {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 480px) {
+    .announcement-details-announcement-title {
+        font-size: 16px;
+    }
+
+    .announcement-details-announcement-date {
+        width: 110px;
+        font-size: 14px;
+    }
+
+    .announcement-details-important-info {
+        font-size: 16px;
+    }
+}

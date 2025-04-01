@@ -1,0 +1,97 @@
+/* components/Home_Programs/Home_Programs.css */
+.programs-section {
+    width: 100%;
+}
+
+.programs-section h2 {
+    color: #132611;
+    margin-bottom: 2rem;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.program-card {
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    display: flex;
+    flex-direction: column;
+    aspect-ratio: 4/3;
+    border: none;
+    cursor: pointer;
+}
+
+.home-programs-arrow {
+    transition: transform 0.3s;
+}
+
+.program-card:hover .program-image {
+    box-shadow: 0 10px 20px #e0f5dd;
+}
+
+.program-card:hover h3 {
+    color: #2E7D32;
+}
+
+.program-image {
+    max-width: 1440px;
+    width: 100%;
+    height: 75%;
+    position: relative;
+    overflow: hidden;
+}
+
+.program-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+}
+
+.program-card:hover .program-image img {
+    transform: scale(1.05);
+}
+
+.program-content {
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
+}
+
+.program-card h3 {
+    color: #132611;
+    font-size: 24px;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.program-card:hover .home-programs-arrow {
+    transform: rotate(45deg);
+}
+
+@media screen and (max-width: 768px) {
+    .program-card {
+        min-width: 100%;
+        max-width: 100%;
+    }
+
+    .programs-section h2 {
+        font-size: 24px;
+    }
+
+    .program-card h3 {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .programs-section h2 {
+        font-size: 16px;
+    }
+
+    .program-card h3 {
+        font-size: 14px;
+    }
+}

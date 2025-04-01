@@ -1,0 +1,21 @@
+.contact-us {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 85vw;
+    max-width: 1440px;
+    margin: 0 auto;
+    margin-bottom: 5%;
+}
+
+
+@media (max-width: 768px) {
+    .contact-us {
+        margin-bottom: 8%;
+    }
+
+    .contact-us {
+        width: 90vw;
+    }
+
+}

@@ -1,0 +1,130 @@
+/* Home_Testimonials.css */
+.HomeTeachingHeadings#Testimonials {
+    font-size: 32px;
+    color: #132611;
+    font-weight: 600;
+}
+
+.HomeTeachingDescription {
+    color: #526652;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.HomeTeachingTestimonialsBox {
+    position: relative;
+    background: transparent;
+    border-radius: 8px;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    z-index: 1;
+    border: 2px solid #2E7D32;
+}
+
+.HomeTeachingTestimonialsHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+/* .HomeTeachingTestimonialsBox:hover {
+} */
+
+.HomeTeachingTestimonialsImage {
+    width: 35%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    border: 2px solid #2E7D32;
+    object-fit: cover;
+    object-position: center;
+    margin: 8px 0;
+}
+
+/* Make description always visible and adjust styling */
+.HomeTeachingTestimonialsDescription {
+    position: static;
+    width: 100%;
+    height: 100%;
+    color: #526652;
+    font-size: 18px;
+    font-weight: 400;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+    text-align: center;
+    padding: 10px;
+    box-sizing: border-box;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.HomeTeachingTestimonialsName {
+    color: #526652;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.HomeTeachingTestimonialsNameContainer {
+    background-color: #E9F2E9;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 10%;
+}
+
+/* Remove hover state for name */
+.HomeTeachingTestimonialsBox:hover .HomeTeachingTestimonialsName {
+    color: #526652;
+}
+
+@media screen and (max-width: 1000px) {
+    .HomeTeachingTestimonialsDescription {
+        font-size: 14px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .HomeTeachingHeadings#Testimonials {
+        font-size: 24px;
+    }
+
+    .HomeTeachingDescription {
+        font-size: 18px;
+    }
+
+    .HomeTeachingTestimonialsDescription {
+        font-size: 16px;
+    }
+
+    .HomeTeachingTestimonialsName {
+        font-size: 18px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .HomeTeachingHeadings#Testimonials {
+        font-size: 16px;
+    }
+
+    .HomeTeachingDescription {
+        font-size: 14px;
+    }
+
+    .HomeTeachingTestimonialsDescription {
+        font-size: 14px;
+    }
+
+    .HomeTeachingTestimonialsName {
+        font-size: 16px;
+    }
+}

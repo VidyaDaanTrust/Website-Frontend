@@ -1,0 +1,95 @@
+/* Banner Section */
+.BannerSection {
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    position: relative;
+}
+
+.BannerImageBox {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+}
+
+.BannerImage {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 20px;
+    z-index: 1;
+    animation: slideDown 1s ease forwards;
+}
+
+.background_cover {
+    width: 100%;
+    background-color: #2E7D32;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+    opacity: 0.4;
+    border-radius: 24px;
+}
+
+.BannerOverlayText {
+    position: absolute;
+    bottom: 10%;
+    left: 5%;
+    color: white;
+    text-align: left;
+    width: 90%;
+    z-index: 3;
+}
+
+#extraText {
+    font-size: 38px;
+    font-weight: 700;
+    color: #ADCCAF;
+}
+
+.BannerOverlayText h1 {
+    font-size: 38px;
+    font-weight: 700;
+    color: #F5FAF5;
+}
+
+.BannerDescription {
+    margin: 3rem 0;
+    font-size: 24px;
+    color: #526652;
+    max-width: 859px;
+    text-align: left;
+}
+
+@keyframes slideDown {
+    0% {
+        opacity: 0;
+        transform: translateY(-50%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .TeachingBannerDescription {
+        width: 100%;
+        font-size: 18px;
+    }
+
+    .TeachingBannerOverlayText {
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .TeachingBannerDescription {
+        font-size: 14px;
+    }
+
+    .TeachingBannerOverlayText {
+        font-size: 18px;
+    }
+}

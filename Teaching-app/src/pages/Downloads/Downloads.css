@@ -1,0 +1,251 @@
+* {
+  box-sizing: border-box;
+}
+
+.downloads {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 85vw;
+  max-width: 1440px;
+  margin: 0 auto;
+}
+
+/* Header section */
+.downloads-header {
+  display: flex;
+  flex-direction: column;
+  max-width: 882px;
+}
+
+.downloads-header h1 {
+  font-size: 38px;
+  font-weight: 700;
+  color: #132611;
+  margin-bottom: 1rem;
+}
+
+.downloads p {
+  font-size: 24px;
+  color: #526652;
+  font-weight: 400;
+  margin-bottom: 3rem;
+}
+
+.downloads h2 {
+  font-size: 32px;
+  font-weight: 600;
+  color: #132611;
+  margin-bottom: 1rem;
+}
+
+/* Cards containers */
+.brochure-cards-container,
+.reports-cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.reports-cards-container {
+  margin-bottom: 40px;
+}
+
+.downloads-content-container {
+  margin-bottom: 30px;
+}
+
+/* Gallery section */
+.downloads-gallery-container {
+  margin-bottom: 5%;
+}
+
+.downloads-gallery-container p {
+  font-size: 24px;
+  color: #526652;
+  margin-bottom: 3rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.gallery-item-card {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-radius: 24px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  width: 80%;
+}
+
+.gallery-item-card:hover .downloadspagearrowicon {
+  transform: rotate(45deg);
+}
+
+.location-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  border-radius: 24px;
+}
+
+.location-image-container {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  position: relative;
+}
+
+.gallery-item-card:hover .location-image {
+  transform: scale(1.05);
+}
+
+.gallery-item-caption {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  font-size: 20px;
+  font-weight: 600;
+  color: #526652;
+  background-color: #F5FAF5;
+  width: 100%;
+}
+
+.downloadspagearrowicon {
+  transition: transform 0.3s ease;
+  width: 16px;
+  height: 16px;
+}
+
+/* Responsive breakpoints */
+@media screen and (max-width: 1200px) {
+  .gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .downloads-header {
+    max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .downloads {
+    width: 90vw;
+  }
+
+  .downloads-header h1 {
+    font-size: 28px;
+  }
+
+  .downloads p {
+    font-size: 18px;
+  }
+
+  .downloads h2 {
+    font-size: 24px;
+  }
+
+  .downloads-gallery-container p {
+    font-size: 18px;
+  }
+
+  .gallery-item-caption {
+    font-size: 16px;
+  }
+
+  .gallery-grid {
+    gap: 16px;
+    justify-items: center;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .gallery-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .downloads-header h1 {
+    font-size: 18px;
+  }
+
+  .downloads p {
+    font-size: 14px;
+  }
+
+  .downloads h2 {
+    font-size: 16px;
+  }
+
+  .downloads-gallery-container p {
+    font-size: 14px;
+  }
+
+  .gallery-item-caption {
+    font-size: 16px;
+  }
+
+  .gallery-item-caption {
+    padding: 8px 12px;
+  }
+}
+
+/* New styles for loading and error states */
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  width: 100%;
+  padding: 20px;
+}
+
+.spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  border-top: 4px solid #3498db;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Error state */
+.error-message {
+  background-color: #ffebee;
+  color: #c62828;
+  padding: 16px;
+  border-radius: 8px;
+  margin: 20px 0;
+  text-align: center;
+}
+
+.error-message button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  background-color: #c62828;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.error-message button:hover {
+  background-color: #b71c1c;
+}

@@ -1,0 +1,140 @@
+* {
+    box-sizing: border-box;
+}
+
+.for-students-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 85vw;
+    max-width: 1440px;
+    margin: 0 auto;
+}
+
+.for-students-student-resources {
+    display: block;
+    flex-direction: column;
+    align-items: center;
+}
+
+.for-students-title-container {
+    width: 60vw;
+    max-width: 882px;
+}
+
+.for-students-title-container .for-students-page-title {
+    font-size: 38px;
+    font-weight: 700;
+    color: #132611;
+    margin-bottom: 1rem;
+
+}
+
+.for-students-title-container .for-students-description {
+    color: #526652;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 3rem;
+}
+
+.for-students-title-container::before {
+    display: none;
+    content: none;
+}
+
+
+/* Container for tabs and content */
+.for-students-tabs-container {
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 5%;
+}
+
+.for-students-resource-tabs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 10vh;
+    min-height: 60px;
+    background-color: #E9F2E9;
+    padding: 5px 5px;
+    border-radius: 8px;
+}
+
+.for-students-tab {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    box-sizing: border-box;
+    border: none;
+    cursor: pointer;
+    color: #132611;
+    transition: all 0.3s ease;
+    text-align: center;
+    font-weight: 700;
+    font-size: 18px;
+    border-radius: 8px;
+}
+
+.for-students-tab.active {
+    background-color: #2E7D32;
+    color: white;
+}
+
+.for-students-tab:not(.active):hover {
+    background: #d1f7cd;
+}
+
+/* Tab content containers */
+.for-students-tab-content {
+    background-color: #E9F2E9;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: none;
+    display: flex;
+    justify-content: center;
+}
+
+
+@media (max-width: 768px) {
+    .for-students-tab {
+        font-size: 14px;
+    }
+
+    .for-students-title-container .for-students-page-title {
+        font-size: 28px;
+    }
+
+    .for-students-title-container .for-students-description {
+        font-size: 16px;
+    }
+
+    .for-students-title-container {
+        width: 90vw;
+    }
+
+    .for-students-tabs-container {
+        gap: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    .for-students-tab {
+        font-size: 12px;
+    }
+
+    .for-students-title-container .for-students-page-title {
+        font-size: 18px;
+    }
+
+    .for-students-title-container .for-students-description {
+        font-size: 12px;
+    }
+}

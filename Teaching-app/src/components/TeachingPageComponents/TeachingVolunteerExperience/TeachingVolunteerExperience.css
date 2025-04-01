@@ -1,0 +1,130 @@
+/* Volunteer Section */
+.TeachingVolunteerExperienceGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 40px;
+    row-gap: 150px;
+    margin: 4rem auto 3rem auto;
+    width: 100%;
+}
+
+.TeachingVolunteerBox {
+    width: 100%;
+    border: 2px solid #A5C7A1;
+    border-radius: 15px;
+    transition-duration: 200ms;
+    box-sizing: border-box;
+    min-height: 300px;
+    position: relative;
+    z-index: 2;
+    overflow: visible;
+}
+
+.TeachingVolunteerImage {
+    width: 23%;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+    top: -5rem;
+    left: 0;
+    right: 0;
+    margin-inline: auto;
+    transition-duration: 200ms;
+    max-width: 200px;
+}
+
+.TeachingVolunteerHeading {
+    color: #132611;
+    font-weight: 600;
+    font-size: 28px;
+    padding: 30px;
+    padding-bottom: 0;
+    transition-duration: 200ms;
+    word-wrap: break-word;
+}
+
+.TeachingVolunteerText {
+    color: #526652;
+    font-weight: 400;
+    font-size: 18px;
+    padding: 15px 30px 15px 30px;
+    transition-duration: 200ms;
+    word-wrap: break-word;
+}
+
+.TeachingVolunteerBox:hover {
+    box-shadow: 2px 2px 10px 2px #A5C7A1,
+        -2px -2px 10px 2px #A5C7A1;
+}
+
+.TeachingVolunteerBox:hover .TeachingVolunteerImage {
+    transform: translateY(10%);
+    box-shadow: -2px 2px 7px 0 #2E7D32, 2px 2px 7px 0 #2E7D32;
+}
+
+.TeachingVolunteerBox:hover .TeachingVolunteerHeading {
+    color: #2E7D32;
+    transform: translateY(-2px);
+}
+
+.TeachingVolunteerBox:hover .TeachingVolunteerText {
+    transform: translateY(15px);
+}
+
+@media screen and (max-width: 1100px) {
+    .TeachingVolunteerImage {
+        top: -3rem;
+        width: 30%;
+    }
+}
+
+
+@media screen and (max-width: 768px) {
+    .TeachingVolunteerExperienceGrid {
+        display: flex;
+        flex-direction: column;
+        gap: 100px;
+        margin: 4rem auto 3rem auto;
+        width: 100%;
+    }
+
+    .TeachingVolunteerImage {
+        top: -6rem;
+    }
+
+    .TeachingVolunteerHeading {
+        font-size: 22px;
+    }
+
+    .TeachingVolunteerText {
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 650px) {
+    .TeachingVolunteerImage {
+        top: -5rem;
+    }
+}
+
+@media screen and (max-width: 550px) {
+    .TeachingVolunteerImage {
+        top: -3rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .TeachingVolunteerHeading {
+        padding-top: 50px;
+        font-size: 16px;
+    }
+
+    .TeachingVolunteerText {
+        font-size: 14px;
+    }
+
+    .TeachingVolunteerHeading {
+        font-size: 18px;
+    }
+}

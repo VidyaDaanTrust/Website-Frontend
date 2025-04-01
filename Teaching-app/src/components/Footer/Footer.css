@@ -1,0 +1,162 @@
+/* Footer.css */
+.footer-container {
+    background-color: #E9F2E9;
+    padding: 2.5rem 1.5rem 1rem;
+    font-family: Arial, sans-serif;
+    color: #4d4d4d;
+  }
+  
+  .footer-main {
+    display: flex;
+    flex-direction: column;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  
+  .footer-left {
+    margin-bottom: 2rem;
+  }
+  
+  .footer-logo {
+    margin-bottom: 1rem;
+  }
+  
+  .footer-logo img {
+    width: 240px;
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 0.5rem;
+  }
+  
+  .footer-logo h2 {
+    font-size: 1.1rem;
+    color: #4e8d2a;
+    font-weight: bold;
+    margin: 0.5rem 0;
+    display: none; /* Hidden by default, shown in the logo image */
+  }
+  
+  .social-icons {
+    display: flex;
+    gap: 1.8rem;
+    margin-top: 1rem;
+  }
+  
+  .social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background-color: transparent;
+    color: #4e8d2a;
+    transition: background-color 0.2s;
+  }
+  
+  .social-icon svg {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .social-icon:hover {
+    color: #4e8d2a;
+  }
+  
+  .footer-menus {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .footer-heading {
+    color: #4d4d4d;
+    font-size: 1.05rem;
+    font-weight: normal;
+    margin-bottom: 0.75rem;
+  }
+  
+  .footer-menu-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .footer-menu-list li {
+    margin-bottom: 0.65rem;
+  }
+  
+  .footer-menu-list a {
+    color: #4e8d2a;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color 0.2s;
+  }
+  
+  .footer-menu-list a:hover {
+    color: #386a1e;
+  }
+  
+  .footer-divider {
+    height: 1px;
+    background-color: #d5d5d5;
+    margin: 1rem 0;
+  }
+  
+  .footer-copyright {
+    text-align: left;
+    color: #4d4d4d;
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+  }
+  
+  /* Media Queries for responsiveness */
+  @media (min-width: 768px) {
+    .footer-main {
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 2rem;
+    }
+    
+    .footer-left {
+      width: 25%;
+      margin-bottom: 0;
+    }
+    
+    .footer-menus {
+      flex: 1;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    
+    .footer-menu-section {
+      flex: 1;
+      padding: 0 1rem;
+    }
+    
+    .footer-menu-section:first-child {
+      padding-left: 0;
+    }
+    
+    .footer-menu-section:last-child {
+      padding-right: 0;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .footer-container {
+      padding: 2rem 1rem 1rem;
+    }
+    
+    .footer-logo img {
+      max-width: 180px;
+    }
+    
+    .social-icons {
+      margin-top: 1.5rem;
+    }
+    
+    .footer-menus {
+      gap: 1.5rem;
+    }
+  }

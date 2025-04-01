@@ -1,0 +1,163 @@
+.announcementItem-announcements-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 8px;
+    background-color: #E9F2E9;
+    padding: 0;
+}
+
+.announcementItem-announcement-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    box-sizing: border-box;
+    padding: 0 2%;
+    background-color: #E9F2E9;
+    border-radius: 8px;
+    margin: 0.5vh 0;
+    width: 100%;
+    height: 13vh;
+    transition: transform 0.3s ease;
+}
+
+.announcementItem-announcement-item:hover {
+    animation: shake 0.5s;
+    background: #e0f5dd;
+}
+
+
+@keyframes shake {
+    0% {
+        transform: translateX(0);
+    }
+
+    50% {
+        transform: translateX(-3px);
+        transform: translateY(-3px);
+    }
+
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.announcementItem-announcement-calendar-logo {
+    width: 32px;
+    height: 32px;
+
+}
+
+/* Update in AnnouncementItem.css */
+.announcementItem-announcement-divider {
+    height: 1px;
+    background-color: #ADCCAF;
+    width: 100%;
+    margin: 0.5vh 0;
+    display: block;
+}
+
+.announcementItem-announcement-header {
+
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.announcementItem-announcement-date-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #526652;
+    width: 135px;
+}
+
+.announcementItem-date-of-announcement {
+    font-size: 16px;
+    color: #526652;
+}
+
+.announcementItem-arrow-icon {
+    transition: transform 0.3s ease;
+}
+
+.announcementItem-announcement-item:hover .announcementItem-arrow-icon {
+    transform: rotate(45deg);
+    /* Rotate to point east on hover */
+}
+
+.announcementItem-announcement-item-title {
+    font-size: 18px;
+    font-weight: 400;
+    color: #132611;
+    line-height: 1;
+    letter-spacing: 0;
+}
+
+.announcementItem-announcement-arrow-icon {
+    width: 45px;
+    height: 45px;
+}
+
+@media (max-width: 1200px) {
+    .announcementItem-announcement-calendar-logo {
+        width: 24px;
+        height: 24px;
+    }
+
+    .announcementItem-announcement-item-title {
+        font-size: 15px;
+        font-weight: 400;
+    }
+
+    .announcementItem-announcement-arrow-icon {
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .announcementItem-announcement-item {
+        height: auto;
+        padding: 15px 2%;
+    }
+
+    .announcementItem-announcement-date-container {
+        width: 120px;
+    }
+
+    .announcementItem-date-of-announcement {
+        font-size: 14px;
+    }
+
+    .announcementItem-announcement-arrow-icon {
+        width: 36px;
+        height: 36px;
+    }
+}
+
+@media (max-width: 480px) {
+    .announcementItem-announcement-date-container {
+        width: 110px;
+    }
+
+    .announcementItem-announcement-item-title {
+        font-size: 14px;
+        margin-top: 8px;
+    }
+
+    .announcementItem-announcement-calendar-logo {
+        width: 20px;
+        height: 20px;
+    }
+
+    .announcementItem-announcement-arrow-icon {
+        width: 30px;
+        height: 30px;
+    }
+}

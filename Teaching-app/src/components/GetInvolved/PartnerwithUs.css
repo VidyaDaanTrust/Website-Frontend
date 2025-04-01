@@ -1,0 +1,138 @@
+/* Main container for the partnership options */
+.partnerWithUs-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #F5FAF5;
+  padding: 0;
+}
+
+/* Individual partnership option item */
+.partnerWithUs-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  padding: 0 2%;
+  background-color: #F5FAF5;
+  border-radius: 8px;
+  margin: 0;
+  width: 100%;
+  height: 13vh;
+  transition: transform 0.3s ease;
+  border-bottom: 1px solid #ADCCAF;
+  cursor: pointer;
+}
+
+/* Remove border from the last item */
+.partnerWithUs-item:last-child {
+  border-bottom: none;
+}
+
+/* Hover effect for partnership items */
+.partnerWithUs-item:hover {
+  animation: shake 0.5s;
+  background: #d1f7cd;
+}
+
+/* Hidden description that appears when an item is clicked */
+.hidden-desc-partner-with-us {
+  width: 100%;
+  padding: 15px 2%;
+  background-color: #F5FAF5;
+  color: #132611;
+  font-size: 16px;
+  line-height: 1.5;
+  border-bottom: 0.2px solid #0b0f0c7c;
+  border-left: 0.2px solid #0b0f0c7c;
+  border-right: 0.2px solid #0b0f0c7c;
+  margin-bottom: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+/* Arrow icon styling */
+.partnerWithUs-arrow {
+  width: 24px;
+  height: 24px;
+  color: #2E7D32;
+  transition: transform 0.3s ease;
+}
+
+/* Arrow movement on hover */
+.partnerWithUs-item:hover .partnerWithUs-arrow {
+  transform: translateX(5px);
+}
+
+/* Shake animation definition */
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(3px);
+    transform: translateY(3px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Content area within each partnership item */
+.partnerWithUs-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: #132611;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+/* Arrow rotation on hover - Note: this overrides the translateX from above */
+.partnerWithUs-item:hover .partnerWithUs-arrow {
+  transform: rotate(-45deg);
+}
+
+/* Responsive design - larger tablets and small desktops */
+@media (max-width: 1200px) {
+  .partnerWithUs-content {
+    font-size: 15px;
+    font-weight: 400;
+  }
+
+  .partnerWithUs-arrow {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+/* Responsive design - tablets and large phones */
+@media (max-width: 768px) {
+  .partnerWithUs-item {
+    height: auto;
+    padding: 15px 2%;
+  }
+
+  .partnerWithUs-arrow {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+/* Responsive design - small phones */
+@media (max-width: 480px) {
+  .partnerWithUs-content {
+    font-size: 14px;
+    margin-top: 8px;
+  }
+
+  .partnerWithUs-arrow {
+    width: 16px;
+    height: 16px;
+  }
+}

@@ -1,0 +1,27 @@
+.TeachingHeadings {
+    font-size: 38px;
+    font-weight: 700;
+    color: #132611;
+    margin-bottom: 1rem;
+}
+
+.TeachingDescription {
+    color: #526652;
+    font-size: 24px;
+    font-weight: 400;
+    margin-bottom: 3rem;
+}
+
+/* Medium screens (max-width: 768px) */
+@media screen and (max-width: 768px) {
+    .TeachingHeadings {
+        font-size: 28px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .TeachingHeadings {
+        font-size: 18px;
+        margin-top: 10%;
+    }
+}

@@ -1,0 +1,155 @@
+.message-container {
+  max-width: 100%;
+  margin: 0 auto 40px;
+  color: #526652;
+}
+
+.message-header {
+  text-align: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid black;
+  padding-bottom: 10px;
+}
+
+.message-header h2 {
+  font-size: 38px;
+  font-weight: 600;
+  color: #132611;
+  margin: 0;
+}
+
+.message-content {
+  /* display: flex; */
+  flex-direction: row;
+  gap: 30px;
+}
+
+.person-photo {
+  display: flex;
+
+  align-items: center;
+  float: left;
+  /* height: 500px; */
+  flex: 0 0 300px;
+  margin: 0px 0px 20px 80px;
+}
+
+.person-photo img {
+  width: 60%;
+  border-radius: 4px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+}
+
+.message-text {
+  flex: 1;
+  color: #526652;
+}
+
+.message-text p {
+  color: #526652;
+  margin-bottom: 20px;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.signature {
+  color: black;
+  font-weight: 500;
+  font-style: italic;
+  margin-top: 20px;
+  padding-top: 10px;
+}
+
+#signature {
+  color: #000000;
+}
+
+/* Medium devices (tablets, 992px and down) */
+@media (max-width: 992px) {
+  .person-photo {
+    max-width: 500px;
+    justify-content: center;
+  }
+
+  .person-photo img {
+    width: 90%;
+  }
+
+  .message-text p {
+    font-size: 16px;
+  }
+
+  .message-header h2 {
+    font-size: 26px;
+  }
+}
+
+/* Small tablets and large phones (768px and down) */
+@media (max-width: 768px) {
+  .message-content {
+    flex-direction: column;
+  }
+
+  .person-photo {
+    max-width: 500px;
+    width: 100%;
+    margin: 0 auto 30px;
+  }
+}
+
+/* Small phones (576px and down) */
+@media (max-width: 576px) {
+  .message-container {
+    padding: 0 15px;
+  }
+
+  .message-header h2 {
+    font-size: 22px;
+  }
+
+  .person-photo {
+    max-width: 300px;
+    width: 100%;
+  }
+
+  .message-text p {
+    font-size: 14px;
+    margin-bottom: 15px;
+  }
+
+  .signature {
+    margin-top: 20px;
+  }
+}
+
+/* Large devices (desktops, 1200px and down) */
+
+
+/* Small tablets and large phones (768px and down) */
+@media (max-width: 768px) {
+  .person-photo {
+    max-width: 400px;
+    width: 100%;
+    margin: 0 20px 20px 0;
+  }
+}
+
+/* Small phones (576px and down) */
+@media (max-width: 576px) {
+  .person-photo {
+
+    width: 80vw;
+    float: none;
+    margin: 0 auto 20px;
+    display: flex;
+  }
+}
+
+/* Extra small devices */
+@media (max-width: 375px) {
+  .person-photo {
+    width: 300px;
+    max-width: 100%;
+  }
+}

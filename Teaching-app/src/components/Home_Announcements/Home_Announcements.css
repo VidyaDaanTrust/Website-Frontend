@@ -1,0 +1,37 @@
+/* components/Home_Announcements/Home_Announcements.css */
+
+.home-announcements-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.home-announcements-section h2 {
+    color: #132611;
+    font-size: 32px;
+    font-weight: 600;
+}
+
+.view-all-link .back-button {
+    flex-direction: row-reverse;
+}
+
+.view-all-link .back-icon {
+    transform: rotate(135deg);
+}
+
+.view-all-link .back-icon.rotated {
+    transform: rotate(180deg);
+}
+
+@media screen and (max-width: 768px) {
+    .home-announcements-section h2 {
+        font-size: 24px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .home-announcements-section h2 {
+        font-size: 16px;
+    }
+}

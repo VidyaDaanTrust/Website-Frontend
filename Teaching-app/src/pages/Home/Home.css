@@ -1,0 +1,138 @@
+/* home.css */
+* {
+  box-sizing: border-box;
+}
+
+.home-container {
+  width: 85vw;
+  max-width: 1440px;
+  margin: 144px auto 64px auto;
+  display: flex;
+  flex-direction: column;
+  gap: 64px;
+}
+
+#home-container-2 {
+  margin: 64px auto;
+}
+
+/* Contribution banner styling when on home page */
+.contribution-on-home {
+  margin-top: 2rem;
+}
+
+/* Ensure consistent layout for all sections */
+.home-container>* {
+  width: 100%;
+}
+
+/* Image section styling */
+.image-section {
+  margin: 40px 0;
+  overflow: hidden;
+  position: relative;
+}
+
+.image-section h2 {
+  font-size: 32px;
+  color: #132611;
+  margin-bottom: 20px;
+}
+
+/* Improved image scroller for better infinite scroll */
+.image-scroller {
+  display: flex;
+  animation: scrollAnimation 15s linear infinite;
+  will-change: transform;
+  /* Optimize for animation */
+}
+
+.image-scroller:hover {
+  animation-play-state: paused;
+}
+
+/* Image track - holds a set of images */
+.image-track {
+  display: flex;
+  gap: 20px;
+  padding-right: 20px;
+  flex-shrink: 0;
+}
+
+/* Ensure the image track width matches its content */
+.image-track {
+  width: max-content;
+  /* Ensure the track width is based on its content */
+}
+
+.image-card {
+  flex: 0 0 auto;
+}
+
+.image-card img {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.3s ease;
+}
+
+.image-card img:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Improved smooth scrolling animation */
+@keyframes scrollAnimation {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+    /* Move by half since we have two sets */
+  }
+}
+
+/* Responsive Breakpoints */
+@media screen and (max-width: 1200px) {
+  .home-container {
+    gap: 48px;
+  }
+
+  .image-scroller {
+    animation-duration: 12s;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .home-container {
+    width: 90vw;
+    gap: 40px;
+  }
+
+  .image-card img {
+    width: 200px;
+    height: 150px;
+  }
+
+  .image-scroller {
+    animation-duration: 10s;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .home-container {
+    width: 90vw;
+    gap: 32px;
+  }
+
+  .image-card img {
+    width: 150px;
+    height: 100px;
+  }
+
+  .image-scroller {
+    animation-duration: 8s;
+  }
+}

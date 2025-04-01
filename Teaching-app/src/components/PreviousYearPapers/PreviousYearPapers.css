@@ -1,0 +1,230 @@
+/* Base container styling */
+.previousYearPapers-and-results-papers-container {
+    width: 100%;
+    background-color: #F5FAF5;
+    padding: 0;
+    margin: 0;
+}
+
+.previousYearPapers-and-results-paper-section {
+    background-color: #F5FAF5;
+    transition: all 0.3s ease;
+    width: 100%;
+    margin-bottom: 0.5vh;
+}
+
+/* First section styling */
+.previousYearPapers-and-results-paper-section.first-section {
+    border-radius: 8px 8px 0 0;
+    overflow: hidden;
+}
+
+/* Last section styling */
+.previousYearPapers-and-results-paper-section.last-section {
+    border-radius: 0 0 8px 8px;
+    overflow: hidden;
+    margin-bottom: 0;
+}
+
+/* Section header styling to match AnnouncementItem */
+.previousYearPapers-and-results-section-header {
+    min-height: 13vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2%;
+    cursor: pointer;
+    margin: 0;
+    background-color: #E9F2E9;
+    border-radius: 8px;
+}
+
+.previousYearPapers-and-results-section-header:hover {
+    background-color: #e0f5dd;
+}
+
+/* Updated font size to match requested main content size */
+.previousYearPapers-and-results-section-header span {
+    color: #132611;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+.previousYearPapers-and-results-toggle-icon {
+    width: 32px;
+    height: 32px;
+    transition: transform 0.3s ease;
+}
+
+.previousYearPapers-and-results-toggle-icon.expanded {
+    transform: rotate(180deg);
+}
+
+.previousYearPapers-and-results-section-content {
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.5s ease-in-out;
+    background-color: #F5FAF5;
+    border-radius: 0 0 8px 8px;
+}
+
+.previousYearPapers-and-results-section-content.show {
+    max-height: 1000px;
+    opacity: 1;
+}
+
+/* Table styling */
+.previousYearPapers-and-results-papers-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #F5FAF5;
+}
+
+/* Updated table text to match sub-content-1 size */
+.previousYearPapers-and-results-papers-table th,
+.previousYearPapers-and-results-papers-table td {
+    padding: 12px 16px;
+    text-align: center;
+    font-size: 18px;
+    color: #526652;
+    font-weight: 400;
+    border-bottom: 1px solid #ADCCAF;
+}
+
+.previousYearPapers-and-results-papers-table th {
+    background-color: #F5FAF5;
+    color: #132611;
+    position: relative;
+    font-weight: 500;
+    border-bottom: 2px solid #ADCCAF;
+    padding-bottom: 8px;
+    font-size: 20px;
+}
+
+.previousYearPapers-and-results-sortable-header {
+    position: relative;
+    cursor: pointer;
+    padding-right: 16px;
+}
+
+.previousYearPapers-and-results-file-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.previousYearPapers-and-results-pdf-icon {
+    margin-right: 8px;
+    width: 28px;
+    height: 30px;
+}
+
+.previousYearPapers-and-results-download-header {
+    text-align: center;
+}
+
+.previousYearPapers-and-results-download-icon {
+    width: 121px;
+    height: 51px;
+    cursor: pointer;
+}
+
+/* Updated divider to match AnnouncementItem */
+.previousYearPapers-and-results-divider {
+    height: 1px;
+    background-color: #ADCCAF;
+    width: 100%;
+    display: block;
+    margin: 0.5vh 0;
+}
+
+/* Wrapper styles */
+.previousYearPapers-and-results-wrapper {
+    width: 100%;
+}
+
+.previousYearPapers-and-results-sort-icon-image {
+    width: 20px;
+    height: 20px;
+}
+
+/* Remove border from last row in table */
+.previousYearPapers-and-results-papers-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+/* Responsive styles for tablet breakpoint (768px) */
+@media (max-width: 768px) {
+    .previousYearPapers-and-results-section-header {
+        min-height: 8vh;
+        padding: 15px 2%;
+    }
+
+    .previousYearPapers-and-results-section-header span {
+        font-size: 18px;
+        /* Main content at 768px */
+    }
+
+    .previousYearPapers-and-results-papers-table th {
+        font-size: 18px;
+        /* Main content at 768px */
+    }
+
+    .previousYearPapers-and-results-papers-table td {
+        font-size: 16px;
+        /* Sub-content-1 at 768px */
+        padding: 10px;
+    }
+
+    .previousYearPapers-and-results-pdf-icon {
+        width: 24px;
+        height: 26px;
+    }
+
+    .previousYearPapers-and-results-download-icon {
+        width: 90px;
+        height: 40px;
+    }
+}
+
+/* Responsive styles for mobile breakpoint (480px) */
+@media (max-width: 480px) {
+    .previousYearPapers-and-results-section-header span {
+        font-size: 14px;
+        /* Main content at 480px */
+    }
+
+    .previousYearPapers-and-results-papers-table {
+        display: block;
+        overflow-x: auto;
+    }
+
+    .previousYearPapers-and-results-papers-table th {
+        font-size: 14px;
+        /* Main content at 480px */
+        white-space: nowrap;
+    }
+
+    .previousYearPapers-and-results-papers-table td {
+        font-size: 12px;
+        /* Sub-content-1 at 480px */
+        white-space: nowrap;
+        padding: 8px;
+    }
+
+    .previousYearPapers-and-results-pdf-icon {
+        width: 20px;
+        height: 22px;
+    }
+
+    .previousYearPapers-and-results-download-icon {
+        width: 70px;
+        height: 35px;
+    }
+
+    .previousYearPapers-and-results-toggle-icon {
+        width: 20px;
+        height: 20px;
+    }
+}
