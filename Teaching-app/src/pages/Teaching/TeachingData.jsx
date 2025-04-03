@@ -185,7 +185,7 @@ export const TeachingTestimonialsData = [
         image: Testimonial4,
         imageAlt: "Chitranshi Negi Testimonial",
         name: "Chitranshi Negi",
-        description: "I am Chitranshi Negi I attended these classes during summer vacation in 2024 at saikot and had the great experience of exploring things and learning things in new way. Before this camp I was a totally different person who don't know how to study and be focused but this camp taught me soo many new things and opportunities , I got to know about exams and job opportunities .This camp told me soo many way to explore things .This camp still helps me in my studies, provided me a mentor who tracks my progress every week and help me with the problems."
+        description: "I am Chitranshi Negi, I attended these classes during summer vacation in 2024 at Saikot and had the great experience of exploring things and learning things in new way. Before this camp I was a totally different person who don't know how to study and be focused but this camp taught me soo many new things and opportunities , I got to know about exams and job opportunities .This camp told me soo many way to explore things .This camp still helps me in my studies, provided me a mentor who tracks my progress every week and help me with the problems."
     },
     {
         image: Testimonial5,
@@ -231,13 +231,13 @@ export const TeachingVolunteerList = [
         image: Volunteer6,
         imageAlt: "Volunteers",
         name: "Bhavneesh",
-        description: "I am Bhavneesh yadav from IIT Delhi, in summer of 2023 I got the opportunity to teach student from 9-12 th class in Uttarakhand. It was a one in a life time experience for me as it made me reflect on my career choice and view on social services. Student there were interactive and had eager to learn nee things, bond we created was much more of big brother type rather than typical student and teacher. Till this day I receive calls from student for guidance showing their eagerness to grow."
+        description: "I am Bhavneesh Yadav from IIT Delhi, in summer of 2023 I got the opportunity to teach student from 9-12 th class in Uttarakhand. It was a once in a life time experience for me as it made me reflect on my career choice and view on social services. Student there were interactive and had eager to learn new things, bond we created was much more of big brother type rather than typical student and teacher. Till this day I receive calls from student for guidance showing their eagerness to grow."
     },
     {
         image: Volunteer7,
         imageAlt: "Volunteers",
         name: "Neeraj",
-        description: "My experience at the Uttarakhand teaching project was incredibly fulfilling. As a teacher and administrative head, I had the privilege of working with village students who were eager to learn, especially since they were being taught by IIT Delhi students. Their enthusiasm and dedication were truly inspiring, making teaching them a joyful and rewarding experience. I feel fortunate to have been part of this wonderful initiative, started by JP Dabral sir, whose vision for improving rural education is truly commendable. This opportunity not only allowed me to contribute to their growth but also left a lasting impact on me. I sincerely hope these bright students achieve great success in life."
+        description: "My experience at the Uttarakhand Teaching Project was incredibly fulfilling. As a teacher and administrative head, I had the privilege of working with village students who were eager to learn, especially since they were being taught by IIT Delhi students. Their enthusiasm and dedication were truly inspiring, making teaching them a joyful and rewarding experience. I feel fortunate to have been part of this wonderful initiative, started by JP Dabral Sir, whose vision for improving rural education is truly commendable. This opportunity not only allowed me to contribute to their growth but also left a lasting impact on me. I sincerely hope these bright students achieve great success in life."
     },
     {
         image: Volunteer8,
@@ -249,12 +249,12 @@ export const TeachingVolunteerList = [
         image: Volunteer9,
         imageAlt: "Volunteers",
         name: "Yash Gupta",
-        description: "Uttrakhand Teaching camp was great. It was a unique life experience where I got the opportunity to teach the village students, at ground level. After Staying with them for so many days I realized the problems they encounter in their studies. I wish to contribute in every little way possible!"
+        description: "Uttrakhand Teaching camp was great. It was a unique life experience where I got the opportunity to teach the village students, at ground level. After staying with them for so many days I realized the problems they encounter in their studies. I wish to contribute in every little way possible!"
     },
     {
         image: Volunteer10,
         imageAlt: "Volunteers",
         name: "Mitashi Jain",
-        description: "I would like to express my sincere gratitude to NSS for giving me this opportunity to spend two enriching weeks in a serene village in Uttarakhand, teaching physics to classes 9 and 11.. Living amidst nature, away from the city's hustle, was both refreshing and humbling.The children's eagerness to learn and their dreams inspired me to give my best in empowering them academically and personally. Their resilience and curiosity taught me invaluable lessons, making this experience deeply transformative. I felt a heartfelt connection with a community that welcomed me like family. This unforgettable experience will remain a cherished chapter of my life, inspiring me to continue making a positive impact wherever I go."
+        description: "I would like to express my sincere gratitude to NSS for giving me this opportunity to spend two enriching weeks in a serene village in Uttarakhand, teaching physics to classes 9 and 11. Living amidst nature, away from the city's hustle, was both refreshing and humbling. The children's eagerness to learn and their dreams inspired me to give my best in empowering them academically and personally. Their resilience and curiosity taught me invaluable lessons, making this experience deeply transformative. I felt a heartfelt connection with a community that welcomed me like family. This unforgettable experience will remain a cherished chapter of my life, inspiring me to continue making a positive impact wherever I go."
     }
 ];

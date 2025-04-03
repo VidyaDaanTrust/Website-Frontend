@@ -27,6 +27,17 @@ const TrusteesList = [
   {
     id: 1,
     number: "01",
+    name: "Rajendra Mohan ",
+    image: RajendraMohan,
+    points: [
+      "Studied at Cambridge School, graduated from Shri Ram College of Commerce, and joined the family business Sri Ram & Son (est. 1882)",
+      "Founded the men's wear brand Pall Mall in 1988, curating fashion for discerning men",
+      "Associated with Ramjas Educational Foundation, active in Rotary & Jaycees, enjoys golf and music"
+    ]
+  },
+  {
+    id: 2,
+    number: "02",
     name: "J.P. Dabral",
     image: JPDabral,
     points: [
@@ -36,25 +47,14 @@ const TrusteesList = [
     ]
   },
   {
-    id: 2,
-    number: "02",
+    id: 3,
+    number: "03",
     name: "Rajeev Jain",
     image: RajeevJain,
     points: [
-      "Rajeev Jain, law graduate, works in consultancy and customised manufacturer of fancy lights, Jain scholar associated in several Jain organizations and philanthropic activities",
+      "Rajeev Jain, law graduate, Consultant and Manufacturer of customised fancy lights, Jain scholar, associated in several Jain organizations and philanthropic activities",
       "Engaged in various charitable and social initiatives",
       "Actively associated with several Jain organizations"
-    ]
-  },
-  {
-    id: 3,
-    number: "03",
-    name: "Rajendra Mohan",
-    image: RajendraMohan,
-    points: [
-      "Studied at Cambridge School, graduated from Shri Ram College, and joined the family business Sri Ram & Son (est. 1882)",
-      "Founded the men's wear brand Pall Mall in 1988, curating fashion for discerning men",
-      "Associated with Ramjas Educational Foundation, active in Rotary & Jaycees, enjoys golf and music"
     ]
   },
   {
@@ -74,7 +74,8 @@ const TrusteesList = [
     image: NareshChand,
     points: [
       "Importer and exporter of sandal wood and various other products",
-      "Committed to the upliftment of rural students through education"
+      "Committed to the upliftment of rural students through education",
+      "Philanthropist"
     ]
   }
 ];
@@ -141,7 +142,7 @@ export const TrusteesHome = () => {
               {trustee.name}
               <img src={VectorHome} alt="Pointer" className="TrusteesHomePointer" />
             </h2>
-            {index === 0 && <h3 className="TrusteesHomeImageDescription">Founder and Chairperson</h3>}
+            {index === 0 && <h3 className="TrusteesHomeImageDescription">(Settler of the Trust)</h3>}
           </div>
         ))}
       </div>

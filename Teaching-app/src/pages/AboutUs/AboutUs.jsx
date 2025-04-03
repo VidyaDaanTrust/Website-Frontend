@@ -19,7 +19,7 @@ const AboutUs = () => {
       name: "J.P. Dabral",
       message: [
         "Education has the power to transform lives, and I firmly believe that quality education should not be limited by geography or economic constraints. I am J.P. Dabral, a visiting faculty at IIT Delhi, and in 2017, I initiated the Uttarakhand Teaching Project in collaboration with NSS IIT Delhi to bridge the educational gap in remote areas of Uttarakhand.",
-        "What started as a small effort has now grown into a life-changing initiative, empowering students from Narayan Bagar, Saikot, Dugadda, Paukhal, and beyond. Each year, talented and motivated students from these regions participate in our intensive residential learning program, guided by IIT Delhi students. Through structured teaching, mentorship, and motivation, we aim to help them excel in board exams and competitive entrance tests like JEE and NEET.",
+        "What started as a small effort has now grown into a life-changing initiative, empowering students from Narayan Bagar, Saikot, Dugadda, Paukhal, Khairasain and beyond. Each year, talented and motivated students from these regions participate in our intensive residential learning program, guided by IIT Delhi students. Through structured teaching, mentorship, and motivation, we aim to help them excel in board exams and competitive entrance tests like JEE and NEET.",
         "The success stories of our students inspire us to continue and expand our efforts. My vision is to create an ecosystem of learning where every deserving student gets the right guidance and support to achieve their dreams, regardless of their background. I invite educators, volunteers, and well-wishers to join us in this journey of empowering the youth through education.",
         "Together, we can make a difference.",
       ],
@@ -32,7 +32,7 @@ const AboutUs = () => {
       message: [
         "Welcome to the Uttarakhand Teaching Project, a mission driven by passion, dedication, and the vision to make quality education accessible to students in remote areas.",
         "I am Nidhi Pandey, Coordinator of the Uttarakhand Teaching Project and Secretary at NSS IIT Delhi. This initiative was founded with the belief that education has the power to transform lives. Through this project, we aim to provide structured learning, mentorship, and academic support to students from class 9th to 12th who aspire to excel in their studies and prepare for competitive exams like JEE and NEET.",
-        "With the support of IIT Delhi students, our goal is to create an environment where learning is not just about textbooks but about critical thinking, problem-solving, and holistic development. Over the years, we have seen students from Narayan Bagar, Saikot, Dugadda, and other remote areas of Uttarakhand make significant progress and achieve their dreams through this initiative",
+        "With the support of IIT Delhi students, our goal is to create an environment where learning is not just about textbooks but about critical thinking, problem-solving, and holistic development. Over the years, we have seen students from Narayan Bagar, Saikot, Dugadda, Paukhal and other remote areas of Uttarakhand make significant progress and achieve their dreams through this initiative",
         "At Uttarakhand Teaching Project, we believe that no dream is too big, and no obstacle is too tough when guided with the right mentorship. If you are a student looking for guidance, a mentor willing to contribute, or someone who shares our vision, we welcome you to be part of this journey.",
         "Let’s work together to build a brighter future for young minds.",
       ],
@@ -114,7 +114,7 @@ const AboutUs = () => {
                   <p>
                     Provide{" "}
                     <span className="highlight">free, high-quality coaching</span>{" "}
-                    for competitive exams such as JEE, NEET, and NDA.
+                    for competitive exams such as JEE, NEET, NDA etc.
                   </p>
                 </div>
                 <div className="mission-point">

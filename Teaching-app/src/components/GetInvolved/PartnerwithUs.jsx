@@ -23,7 +23,7 @@ const PartnerUs = () => {
     },
     {
       id: 4,
-      title: "Sponsor student food cost",
+      title: "Sponsor student's food cost",
       desc: "This is sample desc 4",
     },
     {
