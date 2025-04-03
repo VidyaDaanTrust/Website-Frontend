@@ -12,7 +12,7 @@ const Home_UttarakhandProject = () => {
                 <span><h2>Uttarakhand Teaching Project</h2></span>
                 <span className="home-about-text">
                     <p>
-                        The Uttarakhand Teaching Project is an educational initiative launched in 2017 by J.P. Dabral
+                        The Uttarakhand Teaching Project is an educational initiative launched in 2017 by J.P. Dabral, a visiting faculty at IIT Delhi
                         in collaboration with NSS IIT Delhi. The project aims to provide free and quality education
                         to students from rural and underprivileged areas of Uttarakhand.
                         Every year, a team of dedicated IIT Delhi students and volunteers travel to remote regions
