@@ -17,7 +17,7 @@ const AnnouncementDetails = () => {
     return (
         <div className="announcement-details-container">
             {/* Announcement Content */}
-            <div className="announcement-details-announcement-content">
+            <div className="announcement-details-announcement-content" >
                 {/* Breadcrumb Navigation */}
                 <div className="breadcrumb">
                     <Link to="/" className="breadcrumb-link">Home</Link>
@@ -44,11 +44,14 @@ const AnnouncementDetails = () => {
                 )}
 
                 {(announcement.announcementDetails || announcement.desc) && (
-                    <div className="announcement-details-announcement-message">
-                        <p>
-                            {announcement.announcementDetails || announcement.desc}
-                        </p>
-                    </div>
+                    <div
+                        className="announcement-details-announcement-message"
+                        dangerouslySetInnerHTML={{
+                            __html: Array.isArray(announcement.announcementDetails)
+                                ? announcement.announcementDetails.join('<br><br>')
+                                : announcement.announcementDetails || announcement.desc
+                        }}
+                    />
                 )}
 
                 {(announcement.venue || announcement.time) && (

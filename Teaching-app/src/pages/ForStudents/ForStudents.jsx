@@ -27,7 +27,7 @@ const ForStudents = () => {
                     id: announcement.id,
                     date: formatDate(announcement.date_posted),
                     title: announcement.title,
-                    announcementDetails: [announcement.content],
+                    announcementDetails: [announcement.formatted_content],
                     // Add venue and time with fallbacks even if backend fields don't exist yet
                     venue: announcement.venue || (announcement.original && announcement.original.venue) || 'Location information not available',
                     time: announcement.time || (announcement.original && announcement.original.time) || 'Time information not available',
