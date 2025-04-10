@@ -267,9 +267,9 @@ const api = {
     gallery: {
         getAll: async (params = {}) => {
             try {
-                console.log('Fetching gallery items with params:', params);
+                // console.log('Fetching gallery items with params:', params);
                 const response = await axiosInstance.get('/gallery/', { params });
-                console.log('Gallery response:', response);
+                // console.log('Gallery response:', response);
                 
                 // Process the response to ensure image_url is used
                 const galleryWithCorrectUrls = response.data.map(item => ({
@@ -311,9 +311,9 @@ const api = {
     brochures: {
         getAll: async () => {
             try {
-                console.log('Fetching brochures from:', `${API_URL}/brochures/`);
+                // console.log('Fetching brochures from:', `${API_URL}/brochures/`);
                 const response = await axiosInstance.get('/brochures/');
-                console.log('Brochures response:', response);
+                // console.log('Brochures response:', response);
                 
                 // Process the response to ensure file_url is used
                 const brochuresWithCorrectUrls = response.data.map(brochure => ({
@@ -348,25 +348,27 @@ const api = {
     reports: {
         getAll: async (params = {}) => {
             try {
-                console.log('Fetching reports from:', `${API_URL}/reports/`, params);
-                const response = await axiosInstance.get('/reports/');
-                console.log('Reports response:', response);
-                
-                // Process the response to ensure file_url is used
-                const reportsWithCorrectUrls = response.data.map(report => ({
-                    ...report,
-                    year: report.year || new Date(report.created_at).getFullYear(),
-                    // Use file_url if available, otherwise construct the URL (with null checks)
-                    fileUrl: report.file_url || 
-                             (report.file ? `${API_URL}${report.file.startsWith('/') ? '' : '/'}${report.file}` : '')
-                }));
-                
-                return reportsWithCorrectUrls;
+            //   console.log('Fetching reports from:', `${API_URL}/reports/`, params);
+              const response = await axiosInstance.get('/reports/');
+            //   console.log('Reports response:', response);
+              
+              const reportsWithCorrectUrls = response.data.map(report => {
+                const fileUrl = report.file_url || 
+                                (report.file ? `${API_URL}${report.file.startsWith('/') ? '' : '/'}${report.file}` : '');
+                // console.log('Resolved fileUrl:', fileUrl); // ✅ log here
+                return {
+                  ...report,
+                  year: report.year || new Date(report.created_at).getFullYear(),
+                  fileUrl: fileUrl
+                };
+              });
+          
+              return reportsWithCorrectUrls;
             } catch (error) {
-                console.error('Failed to fetch reports:', error);
-                return [];
+              console.error('Failed to fetch reports:', error);
+              return [];
             }
-        },
+          },
         download: async (id) => {
             try {
                 const response = await axiosInstance.get(`/reports/${id}/download/`, {
