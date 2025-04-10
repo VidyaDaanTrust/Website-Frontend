@@ -20,7 +20,7 @@ const ForStudents = () => {
                 setLoading(true);
                 setError(null);
                 const response = await api.announcements.getAll();
-                console.log('Fetched announcements:', response);
+                // console.log('Fetched announcements:', response);
 
                 // Transform the data to match the expected format
                 const formattedAnnouncements = response.map(announcement => ({

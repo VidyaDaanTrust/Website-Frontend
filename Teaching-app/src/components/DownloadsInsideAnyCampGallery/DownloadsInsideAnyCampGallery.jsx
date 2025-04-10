@@ -59,7 +59,7 @@ const DownloadsInsideAnyCampGallery = () => {
     useEffect(() => {
         // console.log("Gallery Data Received:", galleryData);
         // console.log("Current Active Tab:", activeTab);
-        console.log("Filtered Images:", filteredImages);
+        // console.log("Filtered Images:", filteredImages);
     }, [galleryData, activeTab, filteredImages]);
 
     return (
