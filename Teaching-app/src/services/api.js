@@ -1,7 +1,8 @@
 import axios from 'axios';
 
 // Ensure API_URL doesn't have a trailing slash
-const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:8000').replace(/\/$/, '');
+// const API_URL = (import.meta.env.VITE_API_URL || 'http://localhost:8000').replace(/\/$/, '');
+const API_URL = 'http://localhost:8000'
 
 // Function to get CSRF token from cookies
 function getCsrfToken() {
@@ -382,6 +383,228 @@ const api = {
             }
         }
     },
+    pyp: {
+        getAll: async (params = {}) => {
+            try {
+            //   console.log('Fetching pyp from:', `${API_URL}/pyp/`, params);
+              const response = await axiosInstance.get('/pyp/');
+            //   console.log('PYP response:', response);
+              
+              const pypWithCorrectUrls = response.data.map(pyp => {
+                const fileUrl = pyp.file_url || 
+                                (pyp.file ? `${API_URL}${pyp.file.startsWith('/') ? '' : '/'}${pyp.file}` : '');
+                // console.log('Resolved fileUrl:', fileUrl); // ✅ log here
+                return {
+                  ...pyp,
+                  year: pyp.exam_date || new Date(pyp.created_at).getFullYear(),
+                  fileUrl: fileUrl
+                };
+              });
+          
+              return pypWithCorrectUrls;
+            } catch (error) {
+              console.error('Failed to fetch reports:', error);
+              return [];
+            }
+          },
+        download: async (id) => {
+            try {
+                const response = await axiosInstance.get(`/pyp/${id}/download/`, {
+                    responseType: 'blob',
+                    withCredentials: true
+                });
+                return response;
+            } catch (error) {
+                console.error('Failed to download previous year papers:', error);
+                throw error;
+            }
+        }
+    },
+    stp: {
+        getAll: async (params = {}) => {
+            try {
+            //   console.log('Fetching stp from:', `${API_URL}/stp/`, params);
+              const response = await axiosInstance.get('/stp/');
+            //   console.log('STP response:', response);
+              
+              const stpWithCorrectUrls = response.data.map(stp => {
+                const fileUrl = stp.file_url || 
+                                (stp.file ? `${API_URL}${stp.file.startsWith('/') ? '' : '/'}${stp.file}` : '');
+                // console.log('Resolved fileUrl:', fileUrl); // ✅ log here
+                return {
+                  ...stp,
+                  year: stp.exam_date || new Date(stp.created_at).getFullYear(),
+                  fileUrl: fileUrl
+                };
+              });
+          
+              return stpWithCorrectUrls;
+            } catch (error) {
+              console.error('Failed to fetch reports:', error);
+              return [];
+            }
+          },
+        download: async (id) => {
+            try {
+                const response = await axiosInstance.get(`/stp/${id}/download/`, {
+                    responseType: 'blob',
+                    withCredentials: true
+                });
+                return response;
+            } catch (error) {
+                console.error('Failed to download previous year papers:', error);
+                throw error;
+            }
+        }
+    },
+    wtp: {
+        getAll: async (params = {}) => {
+            try {
+            //   console.log('Fetching pyp from:', `${API_URL}/wtp/`, params);
+              const response = await axiosInstance.get('/wtp/');
+            //   console.log('wtp response:', response);
+              
+              const wtpWithCorrectUrls = response.data.map(wtp => {
+                const fileUrl = wtp.file_url || 
+                                (wtp.file ? `${API_URL}${wtp.file.startsWith('/') ? '' : '/'}${wtp.file}` : '');
+                // console.log('Resolved fileUrl:', fileUrl); // ✅ log here
+                return {
+                  ...wtp,
+                  year: wtp.exam_date || new Date(wtp.created_at).getFullYear(),
+                  fileUrl: fileUrl
+                };
+              });
+          
+              return wtpWithCorrectUrls;
+            } catch (error) {
+              console.error('Failed to fetch reports:', error);
+              return [];
+            }
+          },
+        download: async (id) => {
+            try {
+                const response = await axiosInstance.get(`/wtp/${id}/download/`, {
+                    responseType: 'blob',
+                    withCredentials: true
+                });
+                return response;
+            } catch (error) {
+                console.error('Failed to download previous year papers:', error);
+                throw error;
+            }
+        }
+    },
+    pyr: {
+        getAll: async (params = {}) => {
+            try {
+            //   console.log('Fetching pyr from:', `${API_URL}/pyr/`, params);
+              const response = await axiosInstance.get('/pyr/');
+            //   console.log('PYR response:', response);
+              
+              const pyrWithCorrectUrls = response.data.map(pyr => {
+                const fileUrl = pyr.file_url || 
+                                (pyr.file ? `${API_URL}${pyr.file.startsWith('/') ? '' : '/'}${pyr.file}` : '');
+                // console.log('Resolved fileUrl:', fileUrl); // ✅ log here
+                return {
+                  ...pyr,
+                  year: pyr.result_date || new Date(pyr.created_at).getFullYear(),
+                  fileUrl: fileUrl
+                };
+              });
+          
+              return pyrWithCorrectUrls;
+            } catch (error) {
+              console.error('Failed to fetch reports:', error);
+              return [];
+            }
+          },
+        download: async (id) => {
+            try {
+                const response = await axiosInstance.get(`/pyr/${id}/download/`, {
+                    responseType: 'blob',
+                    withCredentials: true
+                });
+                return response;
+            } catch (error) {
+                console.error('Failed to download previous year papers:', error);
+                throw error;
+            }
+        }
+    },
+    str: {
+        getAll: async (params = {}) => {
+            try {
+            //   console.log('Fetching str from:', `${API_URL}/str/`, params);
+              const response = await axiosInstance.get('/str/');
+            //   console.log('STR response:', response);
+              
+              const strWithCorrectUrls = response.data.map(str => {
+                const fileUrl = str.file_url || 
+                                (str.file ? `${API_URL}${str.file.startsWith('/') ? '' : '/'}${str.file}` : '');
+                // console.log('Resolved fileUrl:', fileUrl); // ✅ log here
+                return {
+                  ...str,
+                  year: str.result_date || new Date(str.created_at).getFullYear(),
+                  fileUrl: fileUrl
+                };
+              });
+          
+              return strWithCorrectUrls;
+            } catch (error) {
+              console.error('Failed to fetch reports:', error);
+              return [];
+            }
+          },
+        download: async (id) => {
+            try {
+                const response = await axiosInstance.get(`/str/${id}/download/`, {
+                    responseType: 'blob',
+                    withCredentials: true
+                });
+                return response;
+            } catch (error) {
+                console.error('Failed to download previous year papers:', error);
+                throw error;
+            }
+        }
+    },
+    wtr: {
+        getAll: async (params = {}) => {
+            try {
+            //   console.log('Fetching wtr from:', `${API_URL}/wtr/`, params);
+              const response = await axiosInstance.get('/wtr/');
+            //   console.log('WTR response:', response);
+              
+              const wtrWithCorrectUrls = response.data.map(wtr => {
+                const fileUrl = wtr.file_url || 
+                                (wtr.file ? `${API_URL}${wtr.file.startsWith('/') ? '' : '/'}${wtr.file}` : '');
+                // console.log('Resolved fileUrl:', fileUrl); // ✅ log here
+                return {
+                  ...wtr,
+                  year: wtr.result_date || new Date(wtr.created_at).getFullYear(),
+                  fileUrl: fileUrl
+                };
+              });
+          
+              return wtrWithCorrectUrls;
+            } catch (error) {
+              console.error('Failed to fetch reports:', error);
+              return [];
+            }
+          },
+        download: async (id) => {
+            try {
+                const response = await axiosInstance.get(`/wtr/${id}/download/`, {
+                    responseType: 'blob',
+                    withCredentials: true
+                });
+                return response;
+            } catch (error) {
+                console.error('Failed to download previous year papers:', error);
+                throw error;
+            }
+        }
+    },
 
     // Event services
     events: {
@@ -433,6 +656,12 @@ export const brochureService = api.brochures;
 
 // Export the report service separately
 export const reportService = api.reports;
+export const pypService = api.pyp;
+export const stpService = api.stp;
+export const wtpService = api.wtp;
+export const pyrService = api.pyr;
+export const strService = api.str;
+export const wtrService = api.wtr;
 
 // Default export for backward compatibility
 export default api;

@@ -5,14 +5,26 @@ import AnnouncementItem from '../../components/AnnouncementItem/AnnouncementItem
 import PreviousYearPapersWrapper from '../../components/PreviousYearPapers/PreviousYearPapersWrapper';
 import ResultsWrapper from '../../components/Results/ResultsWrapper';
 import { Link } from 'react-router-dom';
-import api from '../../services/api';
+import api, { pypService, stpService, wtpService, pyrService, strService, wtrService } from '../../services/api';
 
 const ForStudents = () => {
     const [activeTab, setActiveTab] = useState('updates');
     const [announcements, setAnnouncements] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
-
+    const [pyp, setPyp] = useState([]);
+    const [stp, setStp] = useState([]);
+    const [wtp, setWtp] = useState([]);
+    const [pyr, setPyr] = useState([]);
+    const [str, setStr] = useState([]);
+    const [wtr, setWtr] = useState([]);
+    const [loadingPyp, setLoadingPyp] = useState(false);
+    const [loadingStp, setLoadingStp] = useState(false);
+    const [loadingWtp, setLoadingWtp] = useState(false);
+    const [loadingPyr, setLoadingPyr] = useState(false);
+    const [loadingStr, setLoadingStr] = useState(false);
+    const [loadingWtr, setLoadingWtr] = useState(false);
+ 
     // Fetch announcements from the backend
     useEffect(() => {
         const fetchAnnouncements = async () => {
@@ -49,6 +61,88 @@ const ForStudents = () => {
         fetchAnnouncements();
     }, []);
 
+    // Fetch all papers and results data
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                // Set loading states
+                setLoadingPyp(true);
+                setLoadingStp(true);
+                setLoadingWtp(true);
+                setLoadingPyr(true);
+                setLoadingStr(true);
+                setLoadingWtr(true);
+                setError(null);
+                
+                // Fetch all data in parallel for better performance
+                const [pypData, stpData, wtpData, pyrData, strData, wtrData] = await Promise.all([
+                    pypService.getAll().catch(err => {
+                        console.error('Error fetching PYP data:', err);
+                        return [];
+                    }),
+                    stpService.getAll().catch(err => {
+                        console.error('Error fetching STP data:', err);
+                        return [];
+                    }),
+                    wtpService.getAll().catch(err => {
+                        console.error('Error fetching WTP data:', err);
+                        return [];
+                    }),
+                    pyrService.getAll().catch(err => {
+                        console.error('Error fetching PYR data:', err);
+                        return [];
+                    }),
+                    strService.getAll().catch(err => {
+                        console.error('Error fetching STR data:', err);
+                        return [];
+                    }),
+                    wtrService.getAll().catch(err => {
+                        console.error('Error fetching WTR data:', err);
+                        return [];
+                    })
+                ]);
+
+                // Set state with fetched data
+                setPyp(Array.isArray(pypData) ? pypData : []);
+                setStp(Array.isArray(stpData) ? stpData : []);
+                setWtp(Array.isArray(wtpData) ? wtpData : []);
+                setPyr(Array.isArray(pyrData) ? pyrData : []);
+                setStr(Array.isArray(strData) ? strData : []);
+                setWtr(Array.isArray(wtrData) ? wtrData : []);
+                
+                console.log('Data fetched:', {
+                    pyp: pypData,
+                    stp: stpData,
+                    wtp: wtpData,
+                    pyr: pyrData,
+                    str: strData,
+                    wtr: wtrData
+                });
+            } catch (err) {
+                console.error('Error fetching data:', err);
+                setError('Failed to load some content. Please try again later.');
+                
+                // Set empty arrays as fallback
+                setPyp([]);
+                setStp([]);
+                setWtp([]);
+                setPyr([]);
+                setStr([]);
+                setWtr([]);
+            } finally {
+                // Clear loading states
+                setLoadingPyp(false);
+                setLoadingStp(false);
+                setLoadingWtp(false);
+                setLoadingPyr(false);
+                setLoadingStr(false);
+                setLoadingWtr(false);
+            }
+        };
+
+        fetchData();
+    }, []);
+
     // Helper function to format date to DD-MM-YYYY
     const formatDate = (dateString) => {
         try {
@@ -66,37 +160,263 @@ const ForStudents = () => {
         }
     };
 
-    // Previous Year Papers data organized as an array of categories
-    const previousYearPapers = [
-        {
-            id: 1,
-            sectionName: "Screening test papers",
-            papers: [
-                { no: 1, camp: 'Malethi', examDate: '29-01-2025', fileName: 'Screening_test_paper_year - 2025', downloadLink: '/testing_download_button_forstudents_results.jpg' },
-                { no: 2, camp: 'Saikot', examDate: '29-01-2024', fileName: 'Screening_test_paper_year - 2024', downloadLink: '/testing_download_button_forstudents_results.jpg' },
-                { no: 3, camp: 'Narayan Bhagar', examDate: '29-01-2023', fileName: 'Screening_test_paper_year - 2023', downloadLink: '/testing_download_button_forstudents_results.jpg' }
-            ]
-        },
-        {
-            id: 2,
-            sectionName: "Surprise test papers",
-            papers: [
-                { no: 1, camp: 'Shimla', examDate: '15-02-2025', fileName: 'Surprise_test_paper_1 - 2025', downloadLink: '/testing_download_button_forstudents_results.jpg' },
-                { no: 2, camp: 'Dehradun', examDate: '18-09-2024', fileName: 'Surprise_test_paper_3 - 2024', downloadLink: '/testing_download_button_forstudents_results.jpg' }
-            ]
-        },
-        {
-            id: 3,
-            sectionName: "Weekly test papers",
-            papers: [
-                { no: 1, camp: 'Nainital', examDate: '08-03-2025', fileName: 'Weekly_test_paper_week1 - 2025', downloadLink: '/testing_download_button_forstudents_results.jpg' },
-                { no: 2, camp: 'Dharamshala', examDate: '15-03-2025', fileName: 'Weekly_test_paper_week2 - 2025', downloadLink: '/testing_download_button_forstudents_results.jpg' },
-                { no: 3, camp: 'Manali', examDate: '22-03-2025', fileName: 'Weekly_test_paper_week3 - 2025', downloadLink: '/testing_download_button_forstudents_results.jpg' }
-            ]
-        }
-    ];
+    const formatImageUrl = (imageUrl) => {
+        if (!imageUrl) return '';
 
-    // Results data organized as an array of categories (same structure as previousYearPapers)
+        // If it's already an absolute URL, ensure it uses HTTPS
+        if (imageUrl.startsWith('http')) {
+            return imageUrl.replace('http://', 'https://');
+        }
+
+        // For relative URLs, add the backend URL with HTTPS
+        if (imageUrl.startsWith('/media')) {
+            const apiUrl = import.meta.env.VITE_API_URL.replace('http://', 'https://');
+            return `${apiUrl}${imageUrl}`;
+        }
+
+        return imageUrl;
+    };
+
+    const handleDownload = async (fileUrl, id, type) => {
+        try {
+            if (!fileUrl) {
+                console.error(`No file URL provided for ${type} download`);
+                return;
+            }
+
+            // If direct file URL is available, use window.open
+            if (fileUrl.startsWith('http://') || fileUrl.startsWith('https://')) {
+                window.open(fileUrl, '_blank');
+                return;
+            }
+
+            // Select the appropriate service based on type
+            let response;
+            switch (type) {
+                case 'pyp':
+                    response = await pypService.download(id);
+                    break;
+                case 'stp':
+                    response = await stpService.download(id);
+                    break;
+                case 'wtp':
+                    response = await wtpService.download(id);
+                    break;
+                case 'pyr':
+                    response = await pyrService.download(id);
+                    break;
+                case 'str':
+                    response = await strService.download(id);
+                    break;
+                case 'wtr':
+                    response = await wtrService.download(id);
+                    break;
+                default:
+                    console.error('Invalid download type:', type);
+                    return;
+            }
+
+            // Create a blob from the response data
+            const blob = new Blob([response.data], { type: response.headers['content-type'] });
+            const url = window.URL.createObjectURL(blob);
+
+            // Create a temporary link and click it
+            const link = document.createElement('a');
+            link.href = url;
+            link.setAttribute('download', `${type}_${id}.pdf`); // Default filename
+            document.body.appendChild(link);
+            link.click();
+
+            // Clean up
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(link);
+        } catch (error) {
+            console.error(`Error downloading ${type}:`, error);
+        }
+    };
+
+    // Transform Previous Year Papers data for components
+    const getPreviousYearPapersData = () => {
+        // Check if we're loading any paper data
+        const isLoading = loadingPyp || loadingStp || loadingWtp;
+        
+        if (isLoading) {
+            return [
+                {
+                    id: 1,
+                    sectionName: "Loading papers...",
+                    papers: [
+                        { no: 1, camp: 'Loading...', examDate: 'Loading...', fileName: 'Loading...', downloadLink: '' }
+                    ]
+                }
+            ];
+        }
+
+        // Prepare the data structure
+        const paperSections = [];
+        
+        // Process screening test papers (PYP)
+        if (pyp.length > 0) {
+            const screeningPapers = pyp.map((paper, idx) => ({
+                no: idx + 1,
+                camp: paper.location || 'Not specified',
+                examDate: formatDate(paper.exam_date),
+                fileName: paper.title || `Paper ${paper.id}`,
+                downloadLink: paper.file_url || '',
+                id: paper.id
+            }));
+            
+            paperSections.push({
+                id: 1,
+                sectionName: "Screening test papers",
+                papers: screeningPapers
+            });
+        }
+        
+        // Process surprise test papers (STP)
+        if (stp.length > 0) {
+            const surprisePapers = stp.map((paper, idx) => ({
+                no: idx + 1,
+                camp: paper.location || 'Not specified',
+                examDate: formatDate(paper.exam_date),
+                fileName: paper.title || `Paper ${paper.id}`,
+                downloadLink: paper.file_url || '',
+                id: paper.id
+            }));
+            
+            paperSections.push({
+                id: 2,
+                sectionName: "Surprise test papers",
+                papers: surprisePapers
+            });
+        }
+        
+        // Process weekly test papers (WTP)
+        if (wtp.length > 0) {
+            const weeklyPapers = wtp.map((paper, idx) => ({
+                no: idx + 1,
+                camp: paper.location || 'Not specified',
+                examDate: formatDate(paper.exam_date),
+                fileName: paper.title || `Paper ${paper.id}`,
+                downloadLink: paper.file_url || '',
+                id: paper.id
+            }));
+            
+            paperSections.push({
+                id: 3,
+                sectionName: "Weekly test papers",
+                papers: weeklyPapers
+            });
+        }
+        
+        // If no data is available after loading is complete, provide a message
+        if (paperSections.length === 0) {
+            return [
+                {
+                    id: 1,
+                    sectionName: "No papers available",
+                    papers: [
+                        { no: 1, camp: 'N/A', examDate: 'N/A', fileName: 'No papers are currently available', downloadLink: '' }
+                    ]
+                }
+            ];
+        }
+        
+        return paperSections;
+    };
+    
+    // Transform Results data for components
+    const getResultsData = () => {
+        // Check if we're loading any results data
+        const isLoading = loadingPyr || loadingStr || loadingWtr;
+        
+        if (isLoading) {
+            return [
+                {
+                    id: 1,
+                    sectionName: "Loading results...",
+                    results: [
+                        { no: 1, camp: 'Loading...', standard: 'Loading...', fileName: 'Loading...', downloadLink: '' }
+                    ]
+                }
+            ];
+        }
+        
+        // Prepare the data structure
+        const resultSections = [];
+        
+        // Process screening test results (PYR)
+        if (pyr && pyr.length > 0) {
+            const screeningResults = pyr.map((result, idx) => ({
+                no: idx + 1,
+                camp: result.location || 'Not specified',
+                standard: result.standard || 'All',
+                fileName: result.title || `Result ${result.id}`,
+                downloadLink: result.file_url || '',
+                id: result.id
+            }));
+            
+            resultSections.push({
+                id: 1,
+                sectionName: "Screening test results",
+                results: screeningResults
+            });
+        }
+        
+        // Process surprise test results (STR)
+        if (str && str.length > 0) {
+            const surpriseResults = str.map((result, idx) => ({
+                no: idx + 1,
+                camp: result.location || 'Not specified',
+                standard: result.standard || 'All',
+                fileName: result.title || `Result ${result.id}`,
+                downloadLink: result.file_url || '',
+                id: result.id
+            }));
+            
+            resultSections.push({
+                id: 2,
+                sectionName: "Surprise test results",
+                results: surpriseResults
+            });
+        }
+        
+        // Process weekly test results (WTR)
+        if (wtr && wtr.length > 0) {
+            const weeklyResults = wtr.map((result, idx) => ({
+                no: idx + 1,
+                camp: result.location || 'Not specified',
+                standard: result.standard || 'All',
+                fileName: result.title || `Result ${result.id}`,
+                downloadLink: result.file_url || '',
+                id: result.id
+            }));
+            
+            resultSections.push({
+                id: 3,
+                sectionName: "Weekly test results",
+                results: weeklyResults
+            });
+        }
+        
+        // If no data is available after loading is complete, provide a message
+        if (resultSections.length === 0) {
+            return [
+                {
+                    id: 1,
+                    sectionName: "No results available",
+                    results: [
+                        { no: 1, camp: 'N/A', standard: 'N/A', fileName: 'No results are currently available', downloadLink: '' }
+                    ]
+                }
+            ];
+        }
+        
+        console.log('Results data processed:', resultSections);
+        return resultSections;
+    };
+
+    // Results data organized as an array of categories
     const resultSections = [
         {
             id: 1,
@@ -136,7 +456,6 @@ const ForStudents = () => {
             </div>
 
             {/* Main Content */}
-
             <div className="for-students-title-container">
                 <h1 className="for-students-page-title">Important Resources for students</h1>
                 <p className="for-students-description">
@@ -197,13 +516,65 @@ const ForStudents = () => {
 
                 {activeTab === 'questions' && (
                     <div className="for-students-tab-content">
-                        <PreviousYearPapersWrapper paperSections={previousYearPapers} />
+                        {loadingPyp || loadingStp || loadingWtp ? (
+                            <div className="loading-message">Loading previous year papers...</div>
+                        ) : (
+                            <PreviousYearPapersWrapper 
+                                paperSections={getPreviousYearPapersData()} 
+                                onDownload={(fileUrl, id) => {
+                                    // Determine the correct type based on section
+                                    const paperSections = getPreviousYearPapersData();
+                                    let paperType = 'pyp'; // Default
+                                    
+                                    // Find which section this paper belongs to
+                                    for (const section of paperSections) {
+                                        const paper = section.papers.find(p => p.id === id);
+                                        if (paper) {
+                                            if (section.sectionName.toLowerCase().includes('surprise')) {
+                                                paperType = 'stp';
+                                            } else if (section.sectionName.toLowerCase().includes('weekly')) {
+                                                paperType = 'wtp';
+                                            }
+                                            break;
+                                        }
+                                    }
+                                    
+                                    handleDownload(fileUrl, id, paperType);
+                                }}
+                            />
+                        )}
                     </div>
                 )}
 
                 {activeTab === 'results' && (
                     <div className="for-students-tab-content">
-                        <ResultsWrapper resultSections={resultSections} />
+                        {loadingPyr || loadingStr || loadingWtr ? (
+                            <div className="loading-message">Loading results...</div>
+                        ) : (
+                            <ResultsWrapper 
+                                resultSections={getResultsData()} 
+                                onDownload={(fileUrl, id) => {
+                                    // Determine the correct type based on section
+                                    const resultSections = getResultsData();
+                                    let resultType = 'pyr'; // Default
+                                    
+                                    // Find which section this result belongs to
+                                    for (const section of resultSections) {
+                                        const result = section.results.find(r => r.id === id);
+                                        if (result) {
+                                            if (section.sectionName.toLowerCase().includes('surprise')) {
+                                                resultType = 'str';
+                                            } else if (section.sectionName.toLowerCase().includes('weekly')) {
+                                                resultType = 'wtr';
+                                            }
+                                            break;
+                                        }
+                                    }
+                                    
+                                    handleDownload(fileUrl, id, resultType);
+                                }}
+                            />
+                        )}
                     </div>
                 )}
             </div>
