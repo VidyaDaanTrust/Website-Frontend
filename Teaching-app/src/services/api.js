@@ -186,7 +186,6 @@ const api = {
         submitForm: async (formData) => {
             try {
                 // Get CSRF token
-                const csrfToken = await getCsrfTokenFromServer();
                 
                 // Make the request with proper headers
                 const response = await axios.post(`${API_URL}/contact/`, formData, {
@@ -194,7 +193,6 @@ const api = {
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
-                        'X-CSRFToken': csrfToken
                     }
                 });
                 
@@ -601,41 +599,6 @@ const api = {
                 return response;
             } catch (error) {
                 console.error('Failed to download previous year papers:', error);
-                throw error;
-            }
-        }
-    },
-
-    // Event services
-    events: {
-        getAll: async (params = {}) => {
-            try {
-                const response = await axiosInstance.get('/events/', { params });
-                return response.data;
-            } catch (error) {
-                console.error('Failed to fetch events:', error);
-                throw error;
-            }
-        },
-        
-        getFeatured: async () => {
-            try {
-                const response = await axiosInstance.get('/events/', { 
-                    params: { featured: true } 
-                });
-                return response.data;
-            } catch (error) {
-                console.error('Failed to fetch featured events:', error);
-                throw error;
-            }
-        },
-        
-        getById: async (id) => {
-            try {
-                const response = await axiosInstance.get(`/events/${id}/`);
-                return response.data;
-            } catch (error) {
-                console.error(`Failed to fetch event ${id}:`, error);
                 throw error;
             }
         }

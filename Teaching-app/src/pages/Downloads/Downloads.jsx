@@ -61,7 +61,7 @@ const Downloads = () => {
         // Set default empty arrays
         setBrochures([]);
         setReports([]);
-      } finally {
+      } finally { 
         setLoadingBrochures(false);
         setLoadingReports(false);
       }
