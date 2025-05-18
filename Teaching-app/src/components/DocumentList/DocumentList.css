@@ -1,0 +1,143 @@
+/* src/components/DocumentList/DocumentList.css */
+.document-list-wrapper {
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.pyp-section {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background-color: #E9F2E9;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.section-header:hover {
+    background-color: #d1f7cd;
+}
+
+.section-header h3 {
+    font-size: 20px;
+    color: #132611;
+    margin: 0;
+}
+
+.toggle-icon {
+    width: 24px;
+    height: 24px;
+}
+
+.section-divider {
+    height: 1px;
+    background-color: #ADCCAF;
+    margin: 1rem 0;
+}
+
+.section-divider.bottom {
+    margin-top: 1.5rem;
+}
+
+.table-container {
+    margin-top: 1rem;
+    overflow-x: auto;
+}
+
+.documents-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #ADCCAF;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.documents-table th,
+.documents-table td {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ADCCAF;
+}
+
+.documents-table th {
+    background-color: #E9F2E9;
+    color: #132611;
+    font-weight: 600;
+}
+
+.documents-table tr:last-child td {
+    border-bottom: none;
+}
+
+.documents-table tr:hover {
+    background-color: #f5faf5;
+}
+
+.sortable-header {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.sort-icon {
+    width: 16px;
+    height: 16px;
+    opacity: 0.5;
+    transition: opacity 0.3s ease;
+}
+
+.sort-icon.active {
+    opacity: 1;
+}
+
+.download-cell {
+    text-align: center;
+}
+
+.download-icon {
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.no-documents {
+    padding: 1rem;
+    text-align: center;
+    color: #526652;
+}
+
+@media (max-width: 768px) {
+    .section-header h3 {
+        font-size: 18px;
+    }
+
+    .documents-table th,
+    .documents-table td {
+        padding: 0.5rem 0.75rem;
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-header h3 {
+        font-size: 16px;
+    }
+
+    .documents-table th,
+    .documents-table td {
+        padding: 0.5rem;
+        font-size: 14px;
+    }
+
+    .download-icon {
+        width: 20px;
+        height: 20px;
+    }
+}

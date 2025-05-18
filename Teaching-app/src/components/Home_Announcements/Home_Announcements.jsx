@@ -4,6 +4,8 @@ import './Home_Announcements.css';
 import AnnouncementItem from "../AnnouncementItem/AnnouncementItem.jsx";
 import BackButton from "../BackButton/BackButton.jsx";
 import api from '../../services/api';
+import { updateService } from '../../services/api';
+
 
 const Home_Announcements = () => {
     const [announcements, setAnnouncements] = useState([]);
@@ -16,21 +18,23 @@ const Home_Announcements = () => {
             try {
                 setLoading(true);
                 setError(null);
-                const response = await api.announcements.getAll();
-                console.log('Fetched announcements:', response);
 
-                // Transform the data to match the expected format
-                const formattedAnnouncements = response.map(announcement => ({
-                    id: announcement.id,
-                    date: formatDate(announcement.date_posted),
-                    title: announcement.title,
-                    announcementDetails: [announcement.content],
-                    // Add venue and time with fallbacks even if backend fields don't exist yet
-                    venue: announcement.venue || (announcement.original && announcement.original.venue) || 'Location information not available',
-                    time: announcement.time || (announcement.original && announcement.original.time) || 'Time information not available',
-                    // Store the original for reference 
-                    original: announcement
-                }));
+                // Use updateService instead of api.announcements
+                const response = await updateService.getByCamp();
+                console.log('Fetched updates/announcements:', response);
+
+                // Transform the data to match the expected format for AnnouncementItem
+                const formattedAnnouncements = Array.isArray(response) ? response.map(update => ({
+                    id: update.id,
+                    date: formatDate(update.time || update.created_at),
+                    title: update.title,
+                    announcementDetails: [update.text],
+                    // Add venue and time with fallbacks
+                    venue: update.venue || 'Location information not available',
+                    time: update.examTime || formatTime(update.time) || 'Time information not available',
+                    // Store the original for reference
+                    original: update
+                })) : [];
 
                 setAnnouncements(formattedAnnouncements);
             } catch (err) {

@@ -12,8 +12,9 @@ import { formatImageUrl, formatFileUrl } from '../../utils/mediaUtils';
 
 const Downloads = () => {
   const { gallery, downloads, loading } = useContext(DataContext);
-  const [galleryByLocation, setGalleryByLocation] = useState({});
-  const [loadingGallery, setLoadingGallery] = useState(false);
+  // Update state to store camps instead of gallery by location
+  const [camps, setCamps] = useState([]);
+  const [loadingCamps, setLoadingCamps] = useState(false);
   const [brochures, setBrochures] = useState([]);
   const [reports, setReports] = useState([]);
   const [loadingBrochures, setLoadingBrochures] = useState(false);
@@ -21,24 +22,9 @@ const Downloads = () => {
   const [error, setError] = useState(null);
 
   // Helper function to format image URLs
-  const formatImageUrl = (imageUrl) => {
-    if (!imageUrl) return '';
+  // This can be kept as is or use the imported formatImageUrl utility
 
-    // If it's already an absolute URL, ensure it uses HTTPS
-    if (imageUrl.startsWith('http')) {
-      return imageUrl.replace('http://', 'https://');
-    }
-
-    // For relative URLs, add the backend URL with HTTPS
-    if (imageUrl.startsWith('/media')) {
-      const apiUrl = import.meta.env.VITE_API_URL.replace('http://', 'https://');
-      return `${apiUrl}${imageUrl}`;
-    }
-
-    return imageUrl;
-  };
-
-  // Fetch brochures and reports
+  // Fetch brochures and reports - keep this as is
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -48,12 +34,10 @@ const Downloads = () => {
 
         // Fetch brochures
         const brochuresData = await brochureService.getAll();
-        // console.log('Brochures data:', brochuresData); 
         setBrochures(Array.isArray(brochuresData) ? brochuresData : []);
 
         // Fetch reports
         const reportsData = await reportService.getAll();
-        // console.log('Reports data:', reportsData); 
         setReports(Array.isArray(reportsData) ? reportsData : []);
       } catch (err) {
         console.error('Error fetching data:', err);
@@ -61,7 +45,7 @@ const Downloads = () => {
         // Set default empty arrays
         setBrochures([]);
         setReports([]);
-      } finally { 
+      } finally {
         setLoadingBrochures(false);
         setLoadingReports(false);
       }
@@ -70,116 +54,81 @@ const Downloads = () => {
     fetchData();
   }, []);
 
-  // Fetch gallery data if not available from context
-  // Fetch gallery data if not available from context
+  // Update to fetch camps instead of gallery
   useEffect(() => {
-    // Only fetch if gallery is not available from context
-    if (!gallery || !Array.isArray(gallery) || gallery.length === 0) {
-      const fetchGallery = async () => {
-        try {
-          setLoadingGallery(true);
-          const response = await galleryService.getAll();
-          // Make sure we handle the response structure correctly
-          const galleryItems = response.data || response || [];
-          // Store gallery data in local state
-          setGalleryByLocation(groupGalleryData(galleryItems));
-        } catch (error) {
-          console.error('Error fetching gallery data:', error);
-        } finally {
-          setLoadingGallery(false);
+    const fetchCamps = async () => {
+      try {
+        setLoadingCamps(true);
+        // Use the new API endpoint to get camps
+        const response = await api.camps.getAll();
+        console.log('Camps API response:', response);
+
+        // Handle different response formats
+        let campsData;
+        if (response.data && Array.isArray(response.data)) {
+          campsData = response.data;
+        } else if (Array.isArray(response)) {
+          campsData = response;
+        } else {
+          console.error('Unexpected camps data format:', response);
+          campsData = [];
         }
-      };
 
-      fetchGallery();
-    } else if (gallery.length > 0) {
-      // If gallery is available from context, group it
-      setGalleryByLocation(groupGalleryData(gallery));
-    }
-  }, [gallery]);
+        if (campsData.length === 0) {
+          console.warn('No camps data received from API');
+        }
 
-  // Helper function to group gallery data by location
-  const groupGalleryData = (galleryData) => {
-    if (!Array.isArray(galleryData) || galleryData.length === 0) {
-      return {};
-    }
-
-    // Get unique locations
-    const uniqueLocations = [...new Set(galleryData.map(item => item.location))];
-
-    // Create grouped object
-    const grouped = {};
-    uniqueLocations.forEach(location => {
-      const itemsForLocation = galleryData.filter(item => item.location === location);
-      if (itemsForLocation.length > 0) {
-        const year = itemsForLocation[0].date ? new Date(itemsForLocation[0].date).getFullYear() : '2024';
-        const formattedItems = itemsForLocation.map(item => ({
-          ...item,
-          image: formatImageUrl(item.image)
-        }));
-
-        grouped[location] = {
-          items: formattedItems,
-          year: year
-        };
+        // Store camps data in state
+        setCamps(campsData);
+      } catch (error) {
+        console.error('Error fetching camps data:', error);
+        console.error('Error details:', {
+          message: error.message,
+          response: error.response?.data,
+          status: error.response?.status
+        });
+        setCamps([]);
+      } finally {
+        setLoadingCamps(false);
       }
-    });
+    };
 
-    return grouped;
-  };
+    fetchCamps();
+  }, []);
 
   const navigate = useNavigate();
 
-  const handleClick = async (campLocation) => {
+  // Update to use camp ID instead of location
+  const handleClick = async (camp) => {
     window.scrollTo(0, 0);
-
     try {
-      // Get gallery images for this location from the API
-      const response = await galleryService.getAll({ location: campLocation });
-      const locationGallery = response.data || response || [];
-
-      // console.log('Raw gallery data:', locationGallery); 
-
-      // Process the gallery data to maintain the original category
-      const processedGallery = locationGallery.map(item => {
-        // Debug log for each item's category
-        // console.log('Processing item:', {
-        //   id: item.id,
-        //   originalCategory: item.category,
-        //   title: item.title
-        // });
-
-        // Ensure we're using the correct category field from the backend
-        const category = item.category || item.type || 'regularclasses';
-
-        return {
-          ...item,
-          category: category
-        };
-      });
-
-      // console.log('Processed gallery data:', processedGallery); 
+      // Get gallery images for this camp from the API
+      const response = await galleryService.getByCamp(camp.id);
 
       // Navigate to the gallery view with the processed data
-      navigate(`/downloads/${campLocation.toLowerCase().replace(/\s+/g, '-')}`, {
+      navigate(`/downloads/${camp.city.toLowerCase().replace(/\s+/g, '-')}-${camp.state.toLowerCase().replace(/\s+/g, '-')}`, {
         state: {
-          DownloadsInsideAnyCampGalleryData: processedGallery,
-          location: campLocation,
-          year: galleryByLocation[campLocation]?.year || new Date().getFullYear()
+          DownloadsInsideAnyCampGalleryData: response,
+          location: camp.location,
+          campName: camp.name,
+          year: camp.year || new Date().getFullYear(),
+          campId: camp.id
         }
       });
     } catch (error) {
-      console.error('Error fetching gallery for location:', error);
-      navigate(`/downloads/${campLocation.toLowerCase().replace(/\s+/g, '-')}`, {
+      console.error('Error fetching gallery for camp:', error);
+      navigate(`/downloads/${camp.city.toLowerCase().replace(/\s+/g, '-')}-${camp.state.toLowerCase().replace(/\s+/g, '-')}`, {
         state: {
           DownloadsInsideAnyCampGalleryData: [],
-          location: campLocation
+          location: camp.location,
+          campName: camp.name,
+          campId: camp.id
         }
       });
     }
   };
 
-  // Handle file download
-  // Handle file download
+  // Keep the download handler as is
   const handleDownload = async (fileUrl, id, type) => {
     try {
       if (!fileUrl) {
@@ -222,7 +171,6 @@ const Downloads = () => {
       console.error(`Error downloading ${type}:`, error);
     }
   };
-
   return (
     <>
       <div className="downloads">
@@ -292,26 +240,26 @@ const Downloads = () => {
         <div className='downloads-gallery-container'>
           <h2>Gallery</h2>
           <p>Highlights from our past camps in pictures</p>
-          {loading || loadingGallery ? (
+          {loadingCamps ? (
             <div className="loading-message">Loading gallery...</div>
           ) : (
             <div className="gallery-grid">
-              {Object.keys(galleryByLocation).length > 0 ? (
-                Object.keys(galleryByLocation).map((location) => (
+              {camps.length > 0 ? (
+                camps.map((camp) => (
                   <div
-                    key={location}
+                    key={camp.id}
                     className="gallery-item-card"
-                    onClick={() => handleClick(location)}
+                    onClick={() => handleClick(camp)}
                   >
                     <span className='location-image-container'>
                       <img
                         className='location-image'
-                        src={galleryByLocation[location].items[0].imageUrl || formatImageUrl(galleryByLocation[location].items[0].image)}
-                        alt={`Camp at ${location}`}
+                        src={formatImageUrl(camp.image)}
+                        alt={`Camp at ${camp.location}`}
                       />
                     </span>
                     <span className="gallery-item-caption">
-                      <span>{location} ({galleryByLocation[location].year})</span>
+                      <span>{camp.location} ({camp.year})</span>
                       <img className='downloadspagearrowicon' src={downloadspagearrowicon} alt="" />
                     </span>
                   </div>

@@ -4,6 +4,8 @@
     background-color: #F5FAF5;
     padding: 0;
     margin: 0;
+    /* border: 2px solid red; */
+
 }
 
 .previousYearPapers-and-results-paper-section {
@@ -153,6 +155,12 @@
 .previousYearPapers-and-results-papers-table tbody tr:last-child td {
     border-bottom: none;
 }
+
+.pyp-wrapper,
+.results-wrapper {
+    width: 100%;
+}
+
 
 /* Responsive styles for tablet breakpoint (768px) */
 @media (max-width: 768px) {

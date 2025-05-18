@@ -45,18 +45,9 @@
     line-height: 1.5;
     margin-bottom: 30px;
 }
-.announcement-details-announcement-message a {
-    color: #1b5e20;
-    text-decoration: underline;
-}
-
-.announcement-details-announcement-message a:hover {
-    opacity: 0.8;
-    color: #0f550f;
-}
 
 .announcement-details-announcement-message p {
-    color: #0f550f;
+    color: #526652;
 }
 
 /* Important Information Section */
