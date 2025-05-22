@@ -711,7 +711,7 @@ const api = {
 
         create: async (studentData) => {
             try {
-                const response = await axiosInstance.post('/api/new-student-register/', studentData);
+                const response = await axiosInstance.post('/api/student-register/', studentData);
                 return response.data;
             } catch (error) {
                 console.error('Failed to register student:', error);
