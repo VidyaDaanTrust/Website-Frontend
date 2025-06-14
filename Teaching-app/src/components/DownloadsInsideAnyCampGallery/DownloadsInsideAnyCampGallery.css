@@ -1,27 +1,31 @@
-.DownloadsInsideAnyCampGallery-container {
-    width: 85%;
+.GalleryPage-container {
+    width: 85vw;
     max-width: 1440px;
-    margin: 0 auto;
-    /* padding: 0 20px; */
+    margin: 2rem auto;
+}
+
+.create-button-box-noimage {
+    display: flex;
+    flex-direction: row-reverse;
 }
 
 /* Header section */
-.DownloadsInsideAnyCampGallery-header {
+.GalleryPage-header {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    max-width: 882px;
     margin: 30px 0;
 }
 
-.DownloadsInsideAnyCampGallery-header h1 {
+.GalleryPage-header h1 {
     font-size: 32px;
     font-weight: 700;
     color: #132611;
     margin: 0;
 }
 
-.DownloadsInsideAnyCampGallery-header p {
+.GalleryPage-header p {
+    max-width: 882px;
     font-size: 22px;
     color: #526652;
     line-height: 1.5;
@@ -29,18 +33,18 @@
 }
 
 /* Tabs container */
-.DownloadsInsideAnyCampGallery-tabs-container {
+.GalleryPage-tabs-container {
     width: 100%;
     margin-bottom: 40px;
 }
 
-.DownloadsInsideAnyCampGallery-resource-tabs {
+.GalleryPage-resource-tabs {
     display: flex;
     border-bottom: 1px solid #ADCCAF;
     margin-bottom: 20px;
 }
 
-.DownloadsInsideAnyCampGallery-tab {
+.GalleryPage-tab {
     padding: 12px 16px;
     font-size: 18px;
     font-weight: 400;
@@ -50,12 +54,12 @@
     margin-right: 24px;
 }
 
-.DownloadsInsideAnyCampGallery-tab.active {
+.GalleryPage-tab.active {
     color: #2E7D32;
     font-weight: 500;
 }
 
-.DownloadsInsideAnyCampGallery-tab.active::after {
+.GalleryPage-tab.active::after {
     content: '';
     position: absolute;
     bottom: -1px;
@@ -66,13 +70,13 @@
 }
 
 /* Tab content */
-.DownloadsInsideAnyCampGallery-tab-content {
+.GalleryPage-tab-content {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 24px;
 }
 
-.DownloadsInsideAnyCampGalleryData-image {
+.GalleryPageData-image {
     width: 100%;
     aspect-ratio: 1 / 1;
     object-fit: cover;
@@ -80,12 +84,12 @@
     transition: transform 0.3s ease;
 }
 
-.DownloadsInsideAnyCampGalleryData-image:hover {
+.GalleryPageData-image:hover {
     transform: scale(1.02);
 }
 
 /* Tab navigation buttons */
-.DownloadsInsideAnyCampGalleryData-tab-change {
+.GalleryPageData-tab-change {
     display: flex;
     justify-content: space-between;
     margin: 40px auto 5vh auto;
@@ -93,17 +97,17 @@
 
 /* Responsive breakpoints */
 @media screen and (max-width: 1200px) {
-    .DownloadsInsideAnyCampGallery-tab-content {
+    .GalleryPage-tab-content {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
 @media screen and (max-width: 768px) {
-    .DownloadsInsideAnyCampGallery-container {
+    .GalleryPage-container {
         width: 90%;
     }
 
-    .DownloadsInsideAnyCampGallery-tab {
+    .GalleryPage-tab {
         padding: 10px 12px;
         font-size: 14px;
         margin-right: 16px;
@@ -111,7 +115,7 @@
 }
 
 @media screen and (max-width: 480px) {
-    .DownloadsInsideAnyCampGallery-tab-content {
+    .GalleryPage-tab-content {
         grid-template-columns: 1fr;
     }
 
@@ -120,7 +124,7 @@
         margin: 16px 0;
     }
 
-    .DownloadsInsideAnyCampGallery-tab {
+    .GalleryPage-tab {
         padding: 8px 10px;
         font-size: 13px;
         margin-right: 12px;
@@ -218,9 +222,103 @@
     transform: rotate(180deg);
 }
 
-.DownloadsInsideAnyCampGalleryData-tab-change button {
+.GalleryPageData-tab-change button {
     background-color: #f5faf5;
     border: none;
     font-size: 20px;
     color: #2E7D32;
+}
+
+/* Add these styles to GalleryPage.css */
+
+/* Image tooltip container */
+.image-tooltip-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+/* Tooltip styling */
+.image-tooltip {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(46, 125, 50, 0.85);
+    color: #fff;
+    padding: 1rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    opacity: 0;
+    border-radius: 0 0 8px 8px;
+}
+
+/* Show tooltip on hover */
+.image-tooltip-wrapper:hover .image-tooltip {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+/* Tooltip content styling */
+.image-tooltip h3 {
+    font-size: 18px;
+    font-weight: 500;
+    margin: 0 0 8px 0;
+}
+
+.image-tooltip p {
+    font-size: 14px;
+    margin: 0 0 6px 0;
+    line-height: 1.4;
+}
+
+.image-tooltip .image-date {
+    font-size: 12px;
+    opacity: 0.9;
+    font-style: italic;
+}
+
+/* Adjust image container to accommodate tooltip */
+.GalleryPageData-image-container {
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.GalleryPageData-image-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .image-tooltip h3 {
+        font-size: 16px;
+    }
+
+    .image-tooltip p {
+        font-size: 12px;
+    }
+
+    .image-tooltip .image-date {
+        font-size: 10px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .image-tooltip {
+        padding: 0.75rem;
+    }
+
+    .image-tooltip h3 {
+        font-size: 14px;
+        margin-bottom: 4px;
+    }
+
+    .image-tooltip p {
+        font-size: 12px;
+        margin-bottom: 4px;
+    }
 }

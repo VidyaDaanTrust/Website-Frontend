@@ -49,7 +49,8 @@ const Navbar = () => {
         <li><Link to="/downloads" className={location.pathname === '/downloads' ? 'active' : ''}>Downloads</Link></li>
         <li><Link to="/contact-us" className={location.pathname === '/contact-us' ? 'active' : ''}>Contact Us</Link></li>
         <li className='login-button-navbar-me'>
-          <Link to="/login" className={location.pathname === '/login' ? 'active' : ''} >
+          {/* <Link to="https://admin.himalayanvidyadaan.org/login" className={location.pathname === '/login' ? 'active' : ''} > */}
+          <Link to="http://localhost:5174/login" className={location.pathname === '/login' ? 'active' : ''} >
             Login ›
           </Link>
         </li>

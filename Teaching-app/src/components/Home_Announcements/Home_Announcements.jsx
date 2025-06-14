@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import './Home_Announcements.css';
 import AnnouncementItem from "../AnnouncementItem/AnnouncementItem.jsx";
 import BackButton from "../BackButton/BackButton.jsx";
-import api from '../../services/api';
 import { updateService } from '../../services/api';
 
 
@@ -11,6 +10,21 @@ const Home_Announcements = () => {
     const [announcements, setAnnouncements] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+
+    const formatTime = (dateString) => {
+        try {
+            const date = new Date(dateString);
+            if (isNaN(date)) return null;
+            return date.toLocaleTimeString('en-US', {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            });
+        } catch (e) {
+            console.error('Error formatting time:', e);
+            return null;
+        }
+    };
 
     // Fetch Announcements from Backend
     useEffect(() => {

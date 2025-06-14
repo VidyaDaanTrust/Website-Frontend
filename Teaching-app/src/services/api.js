@@ -24,17 +24,17 @@ async function getCsrfTokenFromServer() {
         }
 
         // If no token in cookies, fetch it from the server
-        const response = await axios.get(`${API_URL}/csrf/`, {
+        const response = await axios.get(`${API_URL}/api/csrf/`, {
             withCredentials: true,
             headers: {
                 'Accept': 'application/json'
             }
         });
 
-        // Get the token from cookies after the request
-        return getCsrfToken();
+        // Return the token from response data
+        return response.data.csrfToken || getCsrfToken();
     } catch (error) {
-        console.warn('Failed to get CSRF token:', error);
+        console.error('Failed to get CSRF token:', error);
         return null;
     }
 }
@@ -45,45 +45,43 @@ const axiosInstance = axios.create({
         'Content-Type': 'application/json',
         'Accept': 'application/json'
     },
-    // withCredentials: true // This is important for cookies to be sent
+    withCredentials: true
 });
 
-// // Add a request interceptor
-// axiosInstance.interceptors.request.use(
-//     async (config) => {
-//         // Add Authorization header if token exists
-//         const token = localStorage.getItem('token');
-//         if (token) {
-//             config.headers.Authorization = `Token ${token}`;
-//         }
+axiosInstance.interceptors.request.use(
+    async (config) => {
+        // Add Authorization header if token exists
+        const token = localStorage.getItem('token');
+        if (token) {
+            config.headers.Authorization = `Token ${token}`;
+        }
 
-//         // Add CSRF token for all non-GET requests
-//         if (config.method !== 'get') {
-//             const csrfToken = await getCsrfTokenFromServer();
-//             if (csrfToken) {
-//                 config.headers['X-CSRFToken'] = csrfToken;
-//             }
-//         }
+        // Add CSRF token for all non-GET requests
+        if (config.method !== 'get') {
+            const csrfToken = await getCsrfTokenFromServer();
+            if (csrfToken) {
+                config.headers['X-CSRFToken'] = csrfToken;
+            }
+        }
 
-//         return config;
-//     },
-//     (error) => {
-//         return Promise.reject(error);
-//     }
-// );
+        return config;
+    },
+    (error) => {
+        return Promise.reject(error);
+    }
+);
 
-// // Add a response interceptor
-// axiosInstance.interceptors.response.use(
-//     (response) => response,
-//     (error) => {
-//         if (error.response?.status === 401) {
-//             localStorage.removeItem('token');
-//         }
-//         return Promise.reject(error);
-//     }
-// );
+// Add a response interceptor
+axiosInstance.interceptors.response.use(
+    (response) => response,
+    (error) => {
+        if (error.response?.status === 401) {
+            localStorage.removeItem('token');
+        }
+        return Promise.reject(error);
+    }
+);
 
-// Export the axios instance with additional methods
 const api = {
     // Auth services
     auth: {
@@ -101,7 +99,7 @@ const api = {
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
-                        'X-CSRFToken': csrfToken
+                        ...(csrfToken && { 'X-CSRFToken': csrfToken })
                     }
                 });
 
@@ -110,8 +108,6 @@ const api = {
                 // Store tokens
                 if (response.data && response.data.token) {
                     localStorage.setItem('token', response.data.token);
-
-                    // Also store username if available
                     if (response.data.username) {
                         localStorage.setItem('username', response.data.username);
                     }
@@ -144,6 +140,9 @@ const api = {
                         'X-CSRFToken': csrfToken
                     }
                 });
+
+                // Don't store token for pending approval accounts
+                // Registration creates inactive account that needs approval
                 return response.data;
             } catch (error) {
                 console.error('Registration error:', {
@@ -152,6 +151,49 @@ const api = {
                     statusText: error.response?.statusText,
                     message: error.message
                 });
+                throw error;
+            }
+        },
+
+        // New method to get pending approvals (for coordinators)
+        getPendingApprovals: async () => {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    throw new Error('No authentication token found');
+                }
+
+                const response = await axiosInstance.get('/api/approval-requests/', {
+                    headers: {
+                        'Authorization': `Token ${token}`
+                    }
+                });
+                return response.data;
+            } catch (error) {
+                console.error('Error fetching pending approvals:', error);
+                throw error;
+            }
+        },
+
+        approveUser: async (userId, action, comments = '') => {
+            try {
+                const token = localStorage.getItem('token');
+                if (!token) {
+                    throw new Error('No authentication token found');
+                }
+
+                const endpoint = action === 'approve' ? 'approve' : 'reject';
+                const response = await axiosInstance.post(`/api/approval-requests/${userId}/${endpoint}/`,
+                    { comments },
+                    {
+                        headers: {
+                            'Authorization': `Token ${token}`
+                        }
+                    }
+                );
+                return response.data;
+            } catch (error) {
+                console.error(`Error ${action}ing user:`, error);
                 throw error;
             }
         },
@@ -168,9 +210,13 @@ const api = {
                     throw new Error('No authentication token found');
                 }
 
-                const response = await axiosInstance.get('/api/profile/', {
+                // Use the correct API URL and add withCredentials
+                const response = await axios.get(`${API_URL}/api/profile/`, {
+                    withCredentials: true,
                     headers: {
-                        'Authorization': `Token ${token}`
+                        'Authorization': `Token ${token}`,
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
                     }
                 });
                 return response.data;
@@ -178,7 +224,8 @@ const api = {
                 console.error('Error fetching profile:', error);
                 throw error;
             }
-        }
+        },
+
     },
 
     contact: {
@@ -266,7 +313,7 @@ const api = {
         getAll: async (params = {}) => {
             try {
                 console.log('Fetching gallery items with params:', params);
-                const response = await axiosInstance.get('/gallery/', { params });
+                const response = await axiosInstance.get('api/gallery/', { params });
 
                 // Add more detailed logging
                 console.log('Gallery raw response:', response);
@@ -303,7 +350,7 @@ const api = {
         // Add method to get all camps with gallery items
         getCamps: async () => {
             try {
-                const response = await axiosInstance.get('/gallery/camps/');
+                const response = await axiosInstance.get('api/gallery/camps/');
                 return response.data;
             } catch (error) {
                 console.error('Failed to fetch camps with gallery:', error);
@@ -315,7 +362,7 @@ const api = {
         getByCamp: async (campId) => {
             try {
                 console.log(`Fetching gallery for camp ID: ${campId}`);
-                const response = await axiosInstance.get(`/gallery/`, {
+                const response = await axiosInstance.get(`api/gallery/`, {
                     params: { camp_id: campId }
                 });
 
@@ -367,7 +414,7 @@ const api = {
         // Keep existing methods
         getById: async (id) => {
             try {
-                const response = await axiosInstance.get(`/gallery/${id}/`);
+                const response = await axiosInstance.get(`api/gallery/${id}/`);
                 return response.data;
             } catch (error) {
                 console.error('Failed to fetch gallery item:', error);
@@ -377,7 +424,7 @@ const api = {
 
         download: async (id) => {
             try {
-                const response = await axiosInstance.get(`/gallery/${id}/download/`, {
+                const response = await axiosInstance.get(`api/gallery/${id}/download/`, {
                     responseType: 'blob'
                 });
                 return response;
@@ -404,19 +451,18 @@ const api = {
                 }
 
                 // Make the request with the correct headers for multipart/form-data
-                const response = await axios.post(`${API_URL}/gallery/`, formData, {
+                const response = await axiosInstance.post(`${API_URL}/api/gallery/`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data',
                     },
-                    // Include auth token if needed
-                    ...(localStorage.getItem('token') ? {
-                        headers: {
-                            'Authorization': `Token ${localStorage.getItem('token')}`
-                        }
-                    } : {})
                 });
-
                 return response.data;
+                // // Include auth token if needed
+                // ...(localStorage.getItem('token') ? {
+                //     headers: {
+                //         'Authorization': `Token ${localStorage.getItem('token')}`
+                //     }
+                // } : {})
             } catch (error) {
                 console.error('Failed to upload gallery image:', error);
                 throw error;
@@ -549,7 +595,7 @@ const api = {
         // Request OTP
         requestOTP: async (phoneNumber) => {
             try {
-                const response = await axiosInstance.post('/api/slot-coordinators/request-otp/', {
+                const response = await axiosInstance.post(`${API_URL}/api/slot-coordinators/request-otp/`, {
                     phone_number: phoneNumber
                 });
                 return response.data;
@@ -562,7 +608,7 @@ const api = {
         // Verify OTP
         verifyOTP: async (otpCode) => {
             try {
-                const response = await axiosInstance.post('/api/slot-coordinators/verify-otp/', {
+                const response = await axiosInstance.post(`${API_URL}/api/slot-coordinators/verify-otp/`, {
                     otp: otpCode
                 });
                 return response.data;
@@ -597,7 +643,7 @@ const api = {
         // Submit preferences
         submitPreferences: async (preferences) => {
             try {
-                const response = await axiosInstance.post('/api/slot-coordinators/preferences/', preferences);
+                const response = await axiosInstance.post(`${API_URL}/api/slot-coordinators/preferences/`, preferences);
                 return response.data;
             } catch (error) {
                 console.error('Failed to submit preferences:', error);
@@ -610,9 +656,7 @@ const api = {
     camps: {
         getAll: async (params = {}) => {
             try {
-                console.log('fetching camps')
-                console.log("Calling:", axiosInstance.defaults.baseURL + '/api/camps/');
-                const response = await axiosInstance.get('api/camps/', { params });
+                const response = await axiosInstance.get('api/camp/', { params });
                 return response.data;
             } catch (error) {
                 console.error('Failed to fetch camps:', error);
@@ -622,7 +666,7 @@ const api = {
 
         getById: async (id) => {
             try {
-                const response = await axiosInstance.get(`/camps/${id}/`);
+                const response = await axiosInstance.get(`api/camp/${id}/`);
                 return response.data;
             } catch (error) {
                 console.error(`Failed to fetch camp ${id}:`, error);
@@ -638,14 +682,57 @@ const api = {
                 console.error(`Failed to fetch gallery for camp ${id}:`, error);
                 return [];
             }
-        }
+        },
+        // Add this to the camps service in api.js
+        create: async (campData) => {
+            try {
+                // const response = await axiosInstance.post(`${API_URL}/api/create-camp/`, campData, {
+                const response = await axiosInstance.post(`/api/camp/`, campData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+                return response.data;
+            } catch (error) {
+                console.error('Failed to create camp:', error);
+                throw error;
+            }
+        },
+        update: async (id, campData) => {
+            try {
+                // console.log('i am passing', id, ...campData);
+                const response = await axiosInstance.put(`${API_URL}/api/camp/${id}/`, campData, {
+                    headers: {
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+                return response.data;
+            } catch (error) {
+                console.error('Failed to update camp:', error);
+                throw error;
+            }
+        },
+        delete: async (id) => {
+            try {
+                const response = await axiosInstance.delete(`/api/camp/${id}/`);
+                return response.data;
+            } catch (error) {
+                console.error('Failed to delete camp:', id, error);
+                throw error;
+            }
+        },
+
     },
 
     // Updates service
     updates: {
         getByCamp: async (campId) => {
             try {
-                const response = await axiosInstance.get(`/api/updates/`);
+                const response = await axiosInstance.get(`/api/updates/`, {
+                    params: {
+                        camp_id: campId,
+                    }
+                });
                 return response.data;
             } catch (error) {
                 console.error(`Failed to fetch updates for camp ${campId}:`, error);
@@ -657,16 +744,23 @@ const api = {
         create: async (updateData) => {
             try {
                 console.log('Sending update data:', updateData);
-                const response = await axiosInstance.post('/api/add_update/', updateData);
+                const response = await axiosInstance.post(`${API_URL}/api/add_update/`, updateData);
                 return response.data;
             } catch (error) {
                 console.error('Failed to create update:', error);
                 throw error;
             }
         },
-
-
-
+        update: async (id, updateData) => {
+            try {
+                const response = await axiosInstance.put(`${API_URL}/api/add_update/?id=${id}`, updateData);
+                // const response = await axiosInstance.put(`${API_URL}/api/add_update/`, id, updateData);
+                return response.data;
+            } catch (error) {
+                console.error('Failed to update update:', error);
+                throw error;
+            }
+        },
         delete: async (updateId) => {
             try {
                 const response = await axiosInstance.delete(`/api/updates/${updateId}/`);
@@ -711,7 +805,7 @@ const api = {
 
         create: async (studentData) => {
             try {
-                const response = await axiosInstance.post('/api/student-register/', studentData);
+                const response = await axiosInstance.post(`${API_URL}/api/students/`, studentData);
                 return response.data;
             } catch (error) {
                 console.error('Failed to register student:', error);
@@ -721,7 +815,7 @@ const api = {
 
         update: async (id, studentData) => {
             try {
-                const response = await axiosInstance.put(`/api/students/${id}/`, studentData);
+                const response = await axiosInstance.put(`${API_URL}/api/students/${id}/`, studentData);
                 return response.data;
             } catch (error) {
                 console.error(`Failed to update student ${id}:`, error);
@@ -743,7 +837,7 @@ const api = {
     campDetail: {
         getAll: async (campId) => {
             try {
-                const response = await axiosInstance.get(`/api/camps/${campId}/`);
+                const response = await axiosInstance.get(`/api/camp/${campId}/`);
                 return response.data;
             } catch (error) {
                 console.error('Failed to fetch students:', error);
@@ -771,24 +865,11 @@ const api = {
                 throw error;
             }
         },
-        getAllResults: async (params = {}) => {
-            try {
-                const response = await api.get('/api/test-results/', {
-                    params: {
-                        ...params
-                    }
-                });
-                return response.data;
-            } catch (error) {
-                console.error('Error fetching test results:', error);
-                throw error;
-            }
-        },
 
         // Upload a new result
         uploadResult: async (formData) => {
             try {
-                const response = await api.post('/api/upload-test-result/', formData, {
+                const response = await api.post(`${API_URL}/api/test-results/`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
@@ -799,6 +880,19 @@ const api = {
                 throw error;
             }
         },
+        update: async (id, formData) => {
+            try {
+                // console.log("data :", id, ...formData);
+                const response = await api.put(`${API_URL}/api/test-results/${id}/`, formData, {
+                    headers: { 'Content-Type': 'multipart/form-data' }
+                });
+                return response.data;
+            } catch (error) {
+                console.error(`Failed to update test-results ${id}:`, error);
+                throw error;
+            }
+        },
+
 
         // Download a result
         downloadResult: async (resultId) => {
@@ -829,24 +923,12 @@ const api = {
                 throw error;
             }
         },
-        getAllPapers: async (params = {}) => {
-            try {
-                const response = await api.get('/api/test-papers/', {
-                    params: {
-                        ...params
-                    }
-                });
-                return response.data;
-            } catch (error) {
-                console.error('Error fetching test papers:', error);
-                throw error;
-            }
-        },
 
         // Upload a new paper
         uploadPaper: async (formData) => {
             try {
-                const response = await api.post('/api/upload-test-paper/', formData, {
+                console.log(...formData)
+                const response = await api.post(`${API_URL}/api/test-papers/`, formData, {
                     headers: {
                         'Content-Type': 'multipart/form-data'
                     }
@@ -869,7 +951,19 @@ const api = {
                 console.error('Error downloading test paper:', error);
                 throw error;
             }
-        }
+        },
+        update: async (id, formData) => {
+            try {
+                // console.log("data :", id, ...formData);
+                const response = await api.put(`${API_URL}/api/test-papers/${id}/`, formData, {
+                    headers: { 'Content-Type': 'multipart/form-data' }
+                });
+                return response.data;
+            } catch (error) {
+                console.error(`Failed to update test-papers ${id}:`, error);
+                throw error;
+            }
+        },
     },
 
     // Generic HTTP methods

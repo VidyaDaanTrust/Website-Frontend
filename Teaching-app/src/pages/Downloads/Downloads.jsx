@@ -103,21 +103,25 @@ const Downloads = () => {
     window.scrollTo(0, 0);
     try {
       // Get gallery images for this camp from the API
+      console.log('clicked camp ', camp.id)
       const response = await galleryService.getByCamp(camp.id);
+      console.log(response)
+      console.log('fetched gallery for camp ', camp.id)
+
 
       // Navigate to the gallery view with the processed data
-      navigate(`/downloads/${camp.city.toLowerCase().replace(/\s+/g, '-')}-${camp.state.toLowerCase().replace(/\s+/g, '-')}`, {
+      navigate(`/downloads/gallery/${camp.id}`, {
         state: {
           DownloadsInsideAnyCampGalleryData: response,
           location: camp.location,
           campName: camp.name,
           year: camp.year || new Date().getFullYear(),
-          campId: camp.id
+          campID: camp.id
         }
       });
     } catch (error) {
       console.error('Error fetching gallery for camp:', error);
-      navigate(`/downloads/${camp.city.toLowerCase().replace(/\s+/g, '-')}-${camp.state.toLowerCase().replace(/\s+/g, '-')}`, {
+      navigate(`/downloads/gallery/${camp.id}`, {
         state: {
           DownloadsInsideAnyCampGalleryData: [],
           location: camp.location,

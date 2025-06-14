@@ -1,11 +1,13 @@
+// website-frontend/src/App.jsx
 import React, { useContext } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
-import { useAuth } from './contexts/AuthContext';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { DataContext } from './store/Data';
 import Navbar from './components/Navbar/Navbar.jsx';
 import Footer from './components/Footer/Footer.jsx';
 import ApiStatus from './components/ApiStatus/ApiStatus';
 import "./App.css";
+
+// Public pages
 import ComingSoon from "./pages/ComingSoon/ComingSoon.jsx";
 import AboutUs from "./pages/AboutUs/AboutUs.jsx";
 import ForStudents from "./pages/ForStudents/ForStudents.jsx";
@@ -17,65 +19,54 @@ import Downloads from "./pages/Downloads/Downloads.jsx";
 import ContactUs from "./pages/ContactUs/ContactUs.jsx";
 import Teaching from "./pages/Teaching/Teaching.jsx";
 import Home from "./pages/Home/Home.jsx";
-import Login from './pages/Login';
-import Register from './pages/Register';
-import Dashboard from './pages/Dashboard';
 
-// Protected Route component
-const ProtectedRoute = ({ children }) => {
-    const { currentUser, loading: authLoading } = useAuth();
-    const { user, loading: dataLoading } = useContext(DataContext);
+// Layout component for public pages
+const PublicLayout = ({ children }) => {
+    const location = useLocation();
 
-    // Check if we have a token regardless of context state
-    const token = localStorage.getItem('token');
+    // Pages that don't need navbar/footer
+    const noLayoutPages = ['/login', '/register'];
+    const showLayout = !noLayoutPages.includes(location.pathname);
 
-    // If auth is still loading, show a loading indicator
-    if (authLoading || dataLoading) {
-        return <div>Loading...</div>;
-    }
-
-    // Allow access if user is authenticated in either context or has a token
-    if (currentUser || user || token) {
+    if (!showLayout) {
         return children;
     }
 
-    // Otherwise redirect to login
-    return <Navigate to="/login" />;
-};
-
-const App = () => {
     return (
-        <div className="app">
+        <div className="website-app-main-container">
             <Navbar />
-            <main>
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/about-us" element={<AboutUs />} />
-                    <Route path="/login" element={<Login />} />
-                    <Route path="/register" element={<Register />} />
-                    <Route
-                        path="/dashboard"
-                        element={
-                            <ProtectedRoute>
-                                <Dashboard />
-                            </ProtectedRoute>
-                        }
-                    />
-                    <Route path="/for-students" element={<ForStudents />} />
-                    <Route path="/announcement/:id" element={<AnnouncementDetails />} />
-                    <Route path="/partnership-option/:id" element={<AnnouncementDetails />} />
-                    <Route path="/downloads/:location" element={<DownloadsInsideAnyCampGallery />} />
-                    <Route path="/downloads" element={<Downloads />} />
-                    <Route path="/trustees" element={<Trustees />} />
-                    <Route path="/teaching" element={<Teaching />} />
-                    <Route path="/contact-us" element={<ContactUs />} />
-                    <Route path="/get-involved" element={<GetInvolved />} />
-                </Routes>
+            <main className="website-app-content-container">
+                {children}
             </main>
             <Footer />
             <ApiStatus />
         </div>
     );
 };
+
+function App() {
+    return (
+        <BrowserRouter>
+            <PublicLayout>
+                <Routes>
+                    {/* Public routes */}
+                    <Route path="/" element={<Home />} />
+                    <Route path="/about-us" element={<AboutUs />} />
+                    <Route path="/for-students" element={<ForStudents />} />
+                    <Route path="/trustees" element={<Trustees />} />
+                    <Route path="/get-involved" element={<GetInvolved />} />
+                    <Route path="/downloads" element={<Downloads />} />
+                    <Route path="/contact-us" element={<ContactUs />} />
+                    <Route path="/teaching" element={<Teaching />} />
+                    <Route path="/coming-soon" element={<ComingSoon />} />
+                    <Route path="/announcement/:id" element={<AnnouncementDetails />} />
+                    <Route path="/downloads/gallery/:campId/" element={<DownloadsInsideAnyCampGallery />} />
+                    {/* Catch all route */}
+                    <Route path="*" element={<Navigate to="/" replace />} />
+                </Routes>
+            </PublicLayout>
+        </BrowserRouter>
+    );
+}
 
 export default App;
